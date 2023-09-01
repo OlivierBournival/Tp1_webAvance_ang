@@ -1,0 +1,18 @@
+<mat-card class="supercard" [style.background-image]="show==='back' ? 'url('+beautifulBackUrl+')' : 'url('+imageUrl+')'">
+  <mat-card-header style="background-color: #0008;" *ngIf="show==='front'">
+    <mat-card-title>{{name}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content style="display: flex; justify-content: flex-end; flex-direction: column; align-content: center; height: 100%"  *ngIf="show==='front'">
+    <table style="font-size: 2em; font-size: 2em; width: fit-content;">
+      <tr>
+        <td><i class="fas fa-fist-raised"></i></td>
+        <td>{{attack}}</td>
+      </tr>
+      <tr [class.red]="health < defense! && health>0">
+        <td><i class="fas fa-shield-alt"></i></td>
+        <td *ngIf="health>0">{{health}}</td>
+        <td *ngIf="health==0">{{defense}}</td>
+      </tr>
+    </table>
+  </mat-card-content>
+</mat-card>

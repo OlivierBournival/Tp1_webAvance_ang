@@ -1,0 +1,26 @@
+<div style="width: 100%;height: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column">
+  <mat-card style="margin: 16px; padding: 16px;">
+      
+    <form>
+
+      <mat-form-field style="width: 100%">
+        <input matInput type="email" placeholder="Courriel" name="email">
+      </mat-form-field>
+
+      <mat-form-field style="width: 100%">
+        <input matInput [type]="hidePassword ? 'password' : 'text'" placeholder="Mot de passe" name="pass">
+        <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field style="width: 100%">
+        <input matInput [type]="hideConfirmation ? 'password' : 'text'" placeholder="Confirmation du mot de passe" name="conf">
+        <mat-icon matSuffix (click)="hideConfirmation = !hideConfirmation">{{hideConfirmation ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary">Enregistrer</button>
+
+    </form>
+  </mat-card>
+  <button mat-raised-button [routerLink]="['/login']" color="accent">Connecter</button>
+
+</div>
