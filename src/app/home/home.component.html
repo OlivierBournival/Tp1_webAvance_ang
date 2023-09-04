@@ -3,8 +3,8 @@
 <button mat-raised-button [routerLink]="['/register']" color="accent">Register</button>
 <span style="margin-left: 10px;"></span>
 <button mat-raised-button [routerLink]="['/match']" color="accent">Board</button>
-<div style="display: flex; padding: 10px;">
-  <app-card [attack]="catcard.attack" [defense]="catcard.defense" [imageUrl]="catcard.imageUrl" [health]="catcard.defense" [name]="catcard.name"></app-card>
+<div style="display: flex; padding: 10px;" *ngFor="let card of cards">
+  <app-card [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl" [health]="card.defense" [name]="card.name"></app-card>
   <span style="margin-left: 10px;"></span>
   <app-card [show]="'back'"></app-card>
 </div>
