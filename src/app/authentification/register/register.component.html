@@ -13,7 +13,7 @@
       </mat-form-field>
 
       <mat-form-field style="width: 100%">
-        <input matInput [type]="hideConfirmation ? 'password' : 'text'" placeholder="Confirmation du mot de passe" name="conf" [(ngModel)]="registerDTO.confirmPassword">
+        <input matInput [type]="hideConfirmation ? 'password' : 'text'" placeholder="Confirmation du mot de passe" name="conf" [(ngModel)]="registerDTO.passwordConfirm">
         <mat-icon matSuffix (click)="hideConfirmation = !hideConfirmation">{{hideConfirmation ? 'visibility_off' : 'visibility'}}</mat-icon>
       </mat-form-field>
 

@@ -8,7 +8,7 @@ import { RegisterDTO } from '../DTO/RegisterDTO';
   providedIn: 'root'
 })
 export class AuthentificationService {
-  domain: string = "https://localhost:7219/api/Account";
+  domain: string = "https://localhost:7219/api/account";
 
   constructor(public http: HttpClient) { }
 
@@ -16,6 +16,7 @@ export class AuthentificationService {
   * @throws {Error}
   */
   async login(loginDTO: LoginDTO) {
+    console.log(loginDTO);
     const data = await lastValueFrom(this.http.post<any>(this.domain + "/login", loginDTO)).catch((error) => {
       console.error(error);
       throw Error(error.error?.message ?? "Unknown error");
@@ -28,6 +29,7 @@ export class AuthentificationService {
   * @throws {Error}
   */
   async register(registerDTO: RegisterDTO) {
+    console.log(registerDTO);
     await lastValueFrom(this.http.post<any>(this.domain + "/register", registerDTO)).catch((error) => {
       console.error(error);
       throw Error(error.error?.message ?? "Unknown error");
