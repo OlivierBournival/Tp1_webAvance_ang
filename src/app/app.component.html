@@ -2,13 +2,11 @@
     <mat-icon class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color"
         style="margin-right: 8px;">class</mat-icon>
     <a href="#/" routerLink="/" style="text-decoration: none;
-    color: inherit;"><span>Super Cartes Infinies</span></a>
+    color: inherit;"><span>Super Cartes Infinies</span></a> 
     <span style="flex: 1 1 auto;"></span>
-    <button mat-raised-button [routerLink]="['/login']" color="warn" style="margin-right: 20px;">Login</button>
-    <button mat-raised-button [routerLink]="['/register']" color="warn" style="margin-right: 20px;">Register</button>
-    <span style="flex: 1 1 auto;"></span>
-    <mat-chip style="margin-right: 20px;">test@test.test</mat-chip>
-    <button mat-raised-button color="warn" (click)="logout()">Se déconnecter</button>
+    <mat-chip style="margin-right: 20px;">{{email}}</mat-chip>
+    <button mat-raised-button color="warn" *ngif="estConnecte" (click)="logout()">Se déconnecter</button>
+    <button mat-raised-button color="warn" *ngif="!estConnecte" >Login</button>
 </mat-toolbar>
 
 <router-outlet></router-outlet>
