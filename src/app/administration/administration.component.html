@@ -1,1 +1,12 @@
-<p>administration works!</p>
+<div style="display: flex; flex-wrap: wrap;" *ngFor="let card of cards">
+  <app-card [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl" [health]="card.defense" [name]="card.name"></app-card>
+  <span style="margin-left: 10px;"></span>
+  <button (click)="openCardFormDialog()">Edit</button>
+    <app-card-form *ngIf="showCardForm"></app-card-form>
+</div>
+
+<span style="margin-left: 10px;"></span>
+
+<div class="fixed-button">
+    <button (click)="openCardFormDialog()">Create</button>
+  </div>
