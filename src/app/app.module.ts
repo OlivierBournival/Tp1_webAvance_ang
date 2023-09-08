@@ -11,6 +11,11 @@ import { CardComponent } from './card/card.component';
 import { MatchComponent } from './match/match.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AdministrationComponent } from './administration/administration.component';
+import { FormsModule } from '@angular/forms';
+import { CardFormComponent } from './card-form/card-form.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CardFormCreateComponent } from './card-form-create/card-form-create.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +25,9 @@ import { HttpClientModule } from '@angular/common/http';
     CardComponent,
     MatchComponent,
     HomeComponent,
-    
+    AdministrationComponent,
+    CardFormComponent,
+    CardFormCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +35,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     MaterialModule,
     HttpClientModule,
+    FormsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

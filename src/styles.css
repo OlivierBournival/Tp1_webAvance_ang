@@ -2,3 +2,10 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.fixed-button {
+    position: fixed;
+    bottom: 20px; /* Ajustez la distance depuis le bas selon vos besoins */
+    right: 20px; /* Ajustez la distance depuis la droite selon vos besoins */
+    z-index: 1000; /* Pour s'assurer que le bouton est au-dessus d'autres éléments */
+  }
