@@ -12,6 +12,9 @@ import { MatchComponent } from './match/match.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     MaterialModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatToolbarModule,
+    MatChipsModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
