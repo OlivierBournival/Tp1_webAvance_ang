@@ -3,44 +3,47 @@ import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { LoginDTO } from '../DTO/LoginDTO';
 import { RegisterDTO } from '../DTO/RegisterDTO';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthentificationService {
-  domain: string = "https://localhost:7219/api/account";
+  baseUrl = "https://localhost:7219/api/";
+  accountBaseUrl = this.baseUrl + "Account/";
 
-  constructor(public http: HttpClient) { }
-
-  /** 
-  * @throws {Error}
-  */
-  async login(loginDTO: LoginDTO) {
-    console.log(loginDTO);
-    const data = await lastValueFrom(this.http.post<any>(this.domain + "/login", loginDTO)).catch((error) => {
-      console.error(error);
-      throw Error(error.error?.message ?? "Unknown error");
-    })
-
-    localStorage.setItem("authToken", (data as any).token);
-  }
+  constructor(public http: HttpClient, public cookieService: CookieService) { }
 
   /** 
   * @throws {Error}
   */
   async register(registerDTO: RegisterDTO) {
-    console.log(registerDTO);
-    await lastValueFrom(this.http.post<any>(this.domain + "/register", registerDTO)).catch((error) => {
+    let result = await lastValueFrom(this.http.post<any>(this.accountBaseUrl + "Register", registerDTO)).catch((error) => {
       console.error(error);
       throw Error(error.error?.message ?? "Unknown error");
     });
+
+    console.log(result);
   }
 
-  logout() {
-    localStorage.removeItem("authToken");
+  /** 
+  * @throws {Error}
+  */
+  async login(loginDTO: LoginDTO) {
+    const data = await lastValueFrom(this.http.post<any>(this.accountBaseUrl + "Login", loginDTO)).catch((error) => {
+      console.error(error);
+      throw Error(error.error?.message ?? "Unknown error");
+    })
+
+    console.log(data);
   }
 
-  isConnected(): boolean {
-    return localStorage.getItem("authToken") != null;
+  async logout() {
+    let result = await lastValueFrom(this.http.get<any>(this.accountBaseUrl + 'Logout')).catch((error) => {
+      console.error(error);
+      throw Error(error.error?.message ?? "Unknown error");
+    })
+    
+    console.log(result);
   }
 }
