@@ -31,8 +31,9 @@ export class AuthentificationService {
   */
   async login(loginDTO: LoginDTO) {
     const data = await lastValueFrom(this.http.post<any>(this.accountBaseUrl + "Login", loginDTO)).catch((error) => {
-      console.error(error);
+      console.error(error); 
       localStorage.setItem("token", data.token);
+      sessionStorage.setItem("email", loginDTO.email);
       throw Error(error.error?.message ?? "Unknown error");
     })
 

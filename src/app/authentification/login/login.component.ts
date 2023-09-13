@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
       await this.authentificationService.login(this.loginDTO);
       console.log(this.loginDTO.email);
-      this.router.navigate(['', this.loginDTO.email]);
+      this.router.navigate(['/home', {email : this.loginDTO.email} ]);
     
 
     } catch (e: any) {
