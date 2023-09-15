@@ -1,0 +1,17 @@
+<div style="display: flex; flex-wrap: wrap;">
+  <ng-container *ngFor="let card of cards">
+    <app-card style="margin-top: 20px;" [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl" [health]="card.defense" [name]="card.name"></app-card> 
+    <button style="margin-top: 20px;" (click)="openCardFormDialog()">Edit</button>
+    <span style="margin-right: 10px"></span>
+  </ng-container>
+</div>
+
+<span style="margin-left: 10px;"></span>
+
+<div class="fixed-button">
+  <button (click)="openCardFormCreateDialog()">Create</button>
+</div>
+
+<ng-container *ngIf="showCardForm">
+  <app-card-form></app-card-form>
+</ng-container>
