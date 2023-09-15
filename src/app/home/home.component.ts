@@ -10,14 +10,8 @@ import { lastValueFrom } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
 
-  catcard = {
-    name: "Jedi Chat",
-    attack: 2,
-    defense: 10,
-    imageUrl:"https://images.squarespace-cdn.com/content/51b3dc8ee4b051b96ceb10de/1394662654865-JKOZ7ZFF39247VYDTGG9/hilarious-jedi-cats-fight-video-preview.jpg?content-type=image%2Fjpeg"
-  } // attack : number, public defense : number, public ImageUrl? : string | null){
-  cards : Card [] =[
-];
+  
+  cards : Card [] =[];
 
   constructor(public http : HttpClient) { }
 
