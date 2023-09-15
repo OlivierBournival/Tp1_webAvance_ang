@@ -14,11 +14,12 @@ export class CardAdminService {
 
   constructor(public http : HttpClient) { }
 
-  async GetCards() : Promise<void> {
+  async GetCards() : Promise<Card[]> {
     this.Cards = [];
-    let x = await lastValueFrom(this.http.get<Card[]>(domain + "Admin/Cards" ))
+    let x = await lastValueFrom(this.http.get<Card[]>(domain + "Admin/Cards/Index" ))
     console.log(x);
     this.Cards = x;
+    return x;
   }
 
   async create(card : Card): Promise<void>
