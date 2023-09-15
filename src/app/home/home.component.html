@@ -7,9 +7,8 @@
 <mat-toolbar class="mat-toolbar mat-toolbar-single-row">
   <span>Mes cartes</span>
 </mat-toolbar>
-<div style="display: flex; flex-wrap: wrap;">
-  <app-card [attack]="catcard.attack" [defense]="catcard.defense" [imageUrl]="catcard.imageUrl"
-    [health]="catcard.defense" [name]="catcard.name" style="margin: 20px;"></app-card>
+<div style="display: flex; flex-wrap: wrap;" *ngFor="let card of cards">
+  <app-card [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl" [health]="card.defense" [name]="card.name"></app-card>
   <span style="margin-left: 10px;"></span>
 </div>
 

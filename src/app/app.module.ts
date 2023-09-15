@@ -25,6 +25,7 @@ import { CookieService } from 'ngx-cookie-service';
     CardComponent,
     MatchComponent,
     HomeComponent,
+    
   ],
   imports: [
     BrowserModule,
