@@ -1,15 +1,10 @@
 <div style="display: flex; margin: 20px; justify-content: center;">
-  <button mat-raised-button [routerLink]="['/match']" style="margin-right: 20px;">Mes cartes</button>
-  <button mat-raised-button color="primary" style="margin-right: 20px;">Le magasin</button>
   <button mat-raised-button color="accent" style="margin-right: 20px;">Joindre une partie</button>
   <span style="margin-left: 10px;"></span>
 </div>
 <mat-toolbar class="mat-toolbar mat-toolbar-single-row">
   <span>Mes cartes</span>
 </mat-toolbar>
-<div style="display: flex; flex-wrap: wrap;" *ngFor="let card of cards">
-  <app-card [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl" [health]="card.defense" [name]="card.name"></app-card>
-  <span style="margin-left: 10px;"></span>
+<div style="padding: 10px; padding-top: 20px; padding-bottom: 20px; display: flex; flex-wrap: wrap; justify-content: center; row-gap: 20px; column-gap: 20px;">
+  <app-card [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl" [health]="card.defense" [name]="card.name" *ngFor="let card of cards"></app-card>
 </div>
-
-<span style="margin-left: 10px;"></span>
