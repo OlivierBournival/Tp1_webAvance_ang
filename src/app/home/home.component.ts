@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
 
   constructor(public http : HttpClient) { }
 
-
   async ngOnInit() {
     
    await this.getcards()
@@ -34,5 +33,4 @@ export class HomeComponent implements OnInit {
     this.cards = cardss;
     }
 
-  
 }

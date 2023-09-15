@@ -1,13 +1,15 @@
-<button mat-raised-button [routerLink]="['/login']" color="accent">Login</button>
-<span style="margin-left: 10px;"></span>
-<button mat-raised-button [routerLink]="['/register']" color="accent">Register</button>
-<span style="margin-left: 10px;"></span>
-<button mat-raised-button [routerLink]="['/match']" color="accent">Board</button>
-<div style="display: flex; padding: 10px;" *ngFor="let card of cards">
+<div style="display: flex; margin: 20px; justify-content: center;">
+  <button mat-raised-button [routerLink]="['/match']" style="margin-right: 20px;">Mes cartes</button>
+  <button mat-raised-button color="primary" style="margin-right: 20px;">Le magasin</button>
+  <button mat-raised-button color="accent" style="margin-right: 20px;">Joindre une partie</button>
+  <span style="margin-left: 10px;"></span>
+</div>
+<mat-toolbar class="mat-toolbar mat-toolbar-single-row">
+  <span>Mes cartes</span>
+</mat-toolbar>
+<div style="display: flex; flex-wrap: wrap;" *ngFor="let card of cards">
   <app-card [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl" [health]="card.defense" [name]="card.name"></app-card>
   <span style="margin-left: 10px;"></span>
-  <app-card [show]="'back'"></app-card>
 </div>
 
 <span style="margin-left: 10px;"></span>
-
