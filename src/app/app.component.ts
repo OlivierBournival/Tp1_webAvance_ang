@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthentificationService } from './services/authentification.service';
 import { Router } from '@angular/router';
 
@@ -7,23 +7,21 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'TP1';
-  email = "allo"
-  cookie = sessionStorage.getItem("token")?.toString()
-  estConnecte = false;
+  email = ""
 
-  constructor(public authentificationService: AuthentificationService, public router:Router) { }
+  constructor(public authentificationService: AuthentificationService, public router: Router) { }
 
-  oninit(){
- if(this.cookie != null){
-  this.estConnecte == true
- }
- 
+  ngOnInit(): void {
+    if (!this.authentificationService.isConnected()) {
+      this.router.navigate(['/login']);
+    }
   }
+
   logout() {
     this.authentificationService.logout();
     this.router.navigate(['/login']);
   }
-  
+
 }

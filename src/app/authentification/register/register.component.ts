@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterDTO } from 'src/app/DTO/RegisterDTO';
 import { AuthentificationService } from 'src/app/services/authentification.service';
@@ -14,12 +13,14 @@ export class RegisterComponent implements OnInit {
   hideConfirmation = true;
   registerDTO: RegisterDTO = new RegisterDTO("", "", "");
 
-  constructor(public authentificationService: AuthentificationService) { }
+  constructor(public authentificationService: AuthentificationService, public router: Router) { }
 
   ngOnInit() {
   }
   
   async registerAction() {
     await this.authentificationService.register(this.registerDTO);
+    // go to /login
+    this.router.navigate(['/login']);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { LoginDTO } from 'src/app/DTO/LoginDTO';
 import { AuthentificationService } from 'src/app/services/authentification.service';
 
@@ -13,9 +13,7 @@ export class LoginComponent implements OnInit {
   loginDTO: LoginDTO = new LoginDTO("", "");
   message: string = "";
 
-  constructor(public authentificationService: AuthentificationService, public router:Router) { }
-
-
+  constructor(public authentificationService: AuthentificationService, public router: Router) { }
 
   ngOnInit() {
 
@@ -23,16 +21,12 @@ export class LoginComponent implements OnInit {
 
   async loginAction() {
     try {
-
+      console.log("Logging in...")
       await this.authentificationService.login(this.loginDTO);
-      console.log(this.loginDTO.email);
-      this.router.navigate(['', this.loginDTO.email]);
-    
-
+      console.log("Logged in !")
+      this.router.navigate(['/', this.authentificationService.email]);
     } catch (e: any) {
-
       this.message = e.message;
     }
   }
-
 }

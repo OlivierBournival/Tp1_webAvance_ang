@@ -1,12 +1,11 @@
 <mat-toolbar class="mat-toolbar mat-toolbar-single-row">
     <mat-icon class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color"
         style="margin-right: 8px;">class</mat-icon>
-    <a href="#/" routerLink="/" style="text-decoration: none;
+    <a href="/" style="text-decoration: none;
     color: inherit;"><span>Super Cartes Infinies</span></a> 
     <span style="flex: 1 1 auto;"></span>
-    <mat-chip style="margin-right: 20px;">{{email}}</mat-chip>
-    <button mat-raised-button color="warn" *ngif="estConnecte" (click)="logout()">Se déconnecter</button>
-    <button mat-raised-button color="warn" *ngif="!estConnecte" >Login</button>
+    <mat-chip style="margin-right: 20px;" *ngIf="this.authentificationService.isConnected()">{{this.authentificationService.email}}</mat-chip>
+    <button mat-raised-button color="warn" *ngIf="this.authentificationService.isConnected()" (click)="logout()">Se déconnecter</button>
 </mat-toolbar>
 
 <router-outlet></router-outlet>
