@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog'
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { CardAdminService } from '../Service/ServiceAdmin/card-admin.service';
 
 @Component({
@@ -16,7 +16,10 @@ export class CardFormComponent implements OnInit {
     imageUrl: ''
   };
 
-  constructor(public dialogRef: MatDialogRef<CardFormComponent>, public service : CardAdminService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<CardFormComponent>, public service : CardAdminService) {
+
+    this.card =  this.data.cardData;
+   }
 
   ngOnInit(): void {
   }

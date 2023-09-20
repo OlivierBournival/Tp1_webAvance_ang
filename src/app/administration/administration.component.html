@@ -1,8 +1,9 @@
 <div style="display: flex; flex-wrap: wrap;">
   <ng-container *ngFor="let card of cards">
     <app-card style="margin-top: 20px;" [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl" [health]="card.defense" [name]="card.name"></app-card> 
-    <button style="margin-top: 20px;" (click)="openCardFormDialog()">Edit</button>
-    <span style="margin-right: 10px"></span>
+    <button style="margin-top: 20px;" (click)="openCardFormDialog(card)">Edit</button>
+    <button style="margin-top: 20px; color: red;" (click)="deleteCard(card.id)">X</button> 
+    <span style="margin-right: 10px;"></span>
   </ng-container>
 </div>
 

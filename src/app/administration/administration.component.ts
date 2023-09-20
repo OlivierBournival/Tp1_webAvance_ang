@@ -28,9 +28,10 @@ ngOnInit(): void {
   this.GetAllCards();
 }
 
-openCardFormDialog() {
+openCardFormDialog(card : any) {
   const dialogRef = this.dialog.open(CardFormComponent, {
-    width: '400px', // Vous pouvez ajuster la largeur
+    width: '400px',
+    data: { cardData : card} // Vous pouvez ajuster la largeur
   });
 
   dialogRef.afterClosed().subscribe(result => {
@@ -65,7 +66,7 @@ async CreateCards() : Promise<void> {
   this.GetAllCards();
 }
 
-async deleteCards(id : any) : Promise<void> {
+async deleteCard(id : any) : Promise<void> {
 
   this.service.delete(id);
   this.GetAllCards();

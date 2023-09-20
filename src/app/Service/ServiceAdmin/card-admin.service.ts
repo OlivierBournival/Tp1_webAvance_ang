@@ -24,6 +24,7 @@ export class CardAdminService {
 
   async create(card : Card): Promise<void>
   {
+    console.log(card)
     let x = await lastValueFrom(this.http.post<Card>(domain + "Admin/Cards/Create", card));
     console.log(x);
     this.Cards.push(x);
@@ -31,14 +32,15 @@ export class CardAdminService {
 
   async edit(card : Card): Promise<void>
   {
-    let x = await lastValueFrom(this.http.post<Card>(domain + "Admin/Cards/Edit/" + card.id, card))
+    console.log(card)
+    let x = await lastValueFrom(this.http.post<Card>("https://localhost:7219/Admin/Cards/Edit/" + card.id, card))
     console.log(x);
     this.GetCards();
 
   }
   async delete(id : Number): Promise<void>
   {
-    let x = await lastValueFrom(this.http.get<any>(domain + "Admin/Cards/Deleter/" +  id));
+    let x = await lastValueFrom(this.http.delete<any>(domain + "Admin/Cards/Delete/" +  id));
     console.log(x);
     for(let i = this.Cards.length - 1; i>= 0; i--){
       if(this.Cards[i].id == id){
