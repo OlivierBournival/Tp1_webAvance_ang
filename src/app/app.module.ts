@@ -16,6 +16,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 import { CookieService } from 'ngx-cookie-service';
+import { JoindrePartieModalComponent } from './modals/joindrePartieModal/joindrePartieModal.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,7 @@ import { CookieService } from 'ngx-cookie-service';
     CardComponent,
     MatchComponent,
     HomeComponent,
-    
+    JoindrePartieModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,7 @@ import { CookieService } from 'ngx-cookie-service';
     MatToolbarModule,
     MatChipsModule,
     MatButtonModule,
+    MatProgressBarModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

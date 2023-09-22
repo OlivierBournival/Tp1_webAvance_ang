@@ -9,28 +9,34 @@ import { lastValueFrom } from 'rxjs';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  cards: Card[] = [];
+  showModal = false;
 
-  
-  cards : Card [] =[];
-
-  constructor(public http : HttpClient) { }
+  constructor(public http: HttpClient) { }
 
   async ngOnInit() {
-    
-   await this.getcards()
-  } 
+    await this.getcards()
+  }
+
   // get all the card of  player.id 
   async getcards() {
-    console.log("objet card atendu : ");  
+    console.log("objet card atendu : ");
     let x = await lastValueFrom(this.http.get<Array<Card>>('https://localhost:7219/api/card/getallcards')); // this string is to be changed 
-    
-    console.log(x);  
-    let cardss : Card [] = []
-    for(let i = 0; i < x.length; i++){
-      cardss.push(new Card (x[i].id, x[i].name ,x[i].attack,x[i].defense,x[i].imageUrl));
-    }
-    console.log("objet card atendu : "+cardss[9].imageUrl);  
-    this.cards = cardss;
-    }
 
+    console.log(x);
+    let cardss: Card[] = []
+    for (let i = 0; i < x.length; i++) {
+      cardss.push(new Card(x[i].id, x[i].name, x[i].attack, x[i].defense, x[i].imageUrl));
+    }
+    console.log("objet card atendu : " + cardss[9].imageUrl);
+    this.cards = cardss;
+  }
+
+  openJoindreModal() {
+    this.showModal = true;
+  }
+
+  closeJoindreModal() {
+    this.showModal = false;
+  }
 }

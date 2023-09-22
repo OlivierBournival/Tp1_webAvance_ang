@@ -1,10 +1,17 @@
 <div style="display: flex; margin: 20px; justify-content: center;">
-  <button mat-raised-button color="accent" style="margin-right: 20px;">Joindre une partie</button>
+  <button mat-raised-button color="accent" style="margin-right: 20px;" (click)="openJoindreModal()">Joindre une
+    partie</button>
   <span style="margin-left: 10px;"></span>
 </div>
+
+<!-- modal joindreModal -->
+<app-joindrePartieModal class="modal-container" *ngIf="showModal" (close)="!showModal" (closeModal)="closeJoindreModal()"></app-joindrePartieModal>
+
 <mat-toolbar class="mat-toolbar mat-toolbar-single-row">
   <span>Mes cartes</span>
 </mat-toolbar>
-<div style="padding: 10px; padding-top: 20px; padding-bottom: 20px; display: flex; flex-wrap: wrap; justify-content: center; row-gap: 20px; column-gap: 20px;">
-  <app-card [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl" [health]="card.defense" [name]="card.name" *ngFor="let card of cards"></app-card>
+<div
+  style="padding: 10px; padding-top: 20px; padding-bottom: 20px; display: flex; flex-wrap: wrap; justify-content: center; row-gap: 20px; column-gap: 20px;">
+  <app-card [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl" [health]="card.defense"
+    [name]="card.name" *ngFor="let card of cards"></app-card>
 </div>
