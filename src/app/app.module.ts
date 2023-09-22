@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './authentification/login/login.component';
@@ -17,7 +16,11 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 import { CookieService } from 'ngx-cookie-service';
 import { JoindrePartieModalComponent } from './modals/joindrePartieModal/joindrePartieModal.component';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { CardFormCreateComponent } from './card-form-create/card-form-create.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CardFormComponent } from './card-form/card-form.component';
+import { AdministrationComponent } from './administration/administration.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     CardComponent,
     MatchComponent,
     HomeComponent,
+    AdministrationComponent,
+    CardFormComponent,
+    CardFormCreateComponent,
     JoindrePartieModalComponent,
   ],
   imports: [
@@ -35,11 +41,12 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     AppRoutingModule,
     MaterialModule,
     HttpClientModule,
-    FormsModule,
-    MatToolbarModule,
-    MatChipsModule,
     MatButtonModule,
-    MatProgressBarModule
+    MatChipsModule,
+    MatToolbarModule,
+    MatProgressBarModule,
+    FormsModule,
+    MatDialogModule,
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

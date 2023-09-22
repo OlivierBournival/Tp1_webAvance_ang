@@ -5,10 +5,12 @@ import { RegisterComponent } from './authentification/register/register.componen
 import { MatchComponent } from './match/match.component';
 import { HomeComponent } from './home/home.component';
 import { authGuardGuard } from './auth-guard.guard';
+import { AdministrationComponent } from './administration/administration.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'match', component: MatchComponent },
+  { path: 'administration', component: AdministrationComponent},
   { path: '', component: HomeComponent, canActivate:[authGuardGuard] },
   { path: '**', redirectTo: '/'}
 ];
