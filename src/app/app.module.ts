@@ -9,7 +9,7 @@ import { MaterialModule } from './material.module';
 import { CardComponent } from './card/card.component';
 import { MatchComponent } from './match/match.component';
 import { HomeComponent } from './home/home.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatChipsModule } from '@angular/material/chips';
@@ -21,6 +21,7 @@ import { CardFormCreateComponent } from './card-form-create/card-form-create.com
 import { MatDialogModule } from '@angular/material/dialog';
 import { CardFormComponent } from './card-form/card-form.component';
 import { AdministrationComponent } from './administration/administration.component';
+import { ApiInterceptor } from './api.interceptor';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,10 @@ import { AdministrationComponent } from './administration/administration.compone
     FormsModule,
     MatDialogModule,
   ],
-  providers: [CookieService],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
+    CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
