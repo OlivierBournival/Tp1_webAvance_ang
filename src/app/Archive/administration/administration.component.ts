@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/*import { Component, OnInit } from '@angular/core';
 import { Card } from '../model/Card';
 import { CardAdminService } from '../Service/ServiceAdmin/card-admin.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -74,4 +74,4 @@ async deleteCard(id : any) : Promise<void> {
 
 
 }
-
+*/

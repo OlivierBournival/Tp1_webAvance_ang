@@ -1,6 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
+/*import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
-import { CardAdminService } from '../Service/ServiceAdmin/card-admin.service';
+import { CardAdminService } from '../ServiceAdmin/card-admin.service';
 
 @Component({
   selector: 'app-card-form',
@@ -34,4 +34,4 @@ export class CardFormComponent implements OnInit {
     // Fermez le pop-up sans enregistrer les modifications
     this.dialogRef.close();
   }
-}
+}*/

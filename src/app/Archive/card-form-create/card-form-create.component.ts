@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/*import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CardAdminService } from '../Service/ServiceAdmin/card-admin.service';
 
@@ -36,3 +36,4 @@ export class CardFormCreateComponent implements OnInit {
     this.dialogRef.close();
   }
 }
+*/
