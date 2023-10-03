@@ -17,7 +17,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { CookieService } from 'ngx-cookie-service';
 import { JoindrePartieModalComponent } from './modals/joindrePartieModal/joindrePartieModal.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { CardFormCreateComponent } from './card-form-create/card-form-create.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CardFormComponent } from './card-form/card-form.component';
 import { AdministrationComponent } from './administration/administration.component';
@@ -31,9 +30,6 @@ import { ApiInterceptor } from './api.interceptor';
     CardComponent,
     MatchComponent,
     HomeComponent,
-    AdministrationComponent,
-    CardFormComponent,
-    CardFormCreateComponent,
     JoindrePartieModalComponent,
   ],
   imports: [
