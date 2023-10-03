@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Card } from '../model/Card';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
+import { MatchServiceService } from '../services/matchService.service';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ export class HomeComponent implements OnInit {
   cards: Card[] = [];
   showModal = false;
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient, public serviceMatch : MatchServiceService) { }
 
   async ngOnInit() {
     await this.getcards()
@@ -34,6 +35,7 @@ export class HomeComponent implements OnInit {
 
   openJoindreModal() {
     this.showModal = true;
+    this.serviceMatch.joinMatch();
   }
 
   closeJoindreModal() {
