@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Card } from '../model/Card';
+import { Card } from '../models/Card';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { MatchServiceService } from '../services/matchService.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +16,9 @@ export class HomeComponent implements OnInit {
 
   constructor(
     public http: HttpClient,
-    public serviceMatch: MatchServiceService
-  ) {}
+    public serviceMatch: MatchServiceService,
+    public router: Router
+  ) { }
 
   async ngOnInit() {
     await this.getcards();
@@ -40,9 +42,31 @@ export class HomeComponent implements OnInit {
     console.log('getcards done');
   }
 
-  openJoindreModal() {
+  async openJoindreModal() {
     this.showModal = true;
-    this.serviceMatch.joinMatch();
+
+    let joined = false;
+
+    while (!joined) {
+      try {
+        joined = await this.serviceMatch.joinMatch();
+      }
+      catch (x: any) {
+
+      }
+
+      if (joined) {
+        this.router.navigate(['/match']);
+        break;
+      }
+
+      await this.delay(1000);
+    }
+
+  }
+
+  async delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   closeJoindreModal() {

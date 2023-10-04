@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatchServiceService } from '../services/matchService.service';
 
 @Component({
   selector: 'app-match',
@@ -6,12 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./match.component.css'],
 })
 export class MatchComponent implements OnInit {
-  constructor() {}
+  constructor(public serviceMatch: MatchServiceService) { }
 
   mycards: any = [];
   enemycards: any = [];
 
   ngOnInit() {
+    this.serviceMatch.StartMatch()
+
     let card = {
       name: 'Jedi Chat',
       attack: 2,
@@ -23,5 +26,17 @@ export class MatchComponent implements OnInit {
       this.mycards.push(card);
       this.enemycards.push(card);
     }
+
+    setInterval(() => {
+      this.UpdateMatch();
+    }, 10000);
+  }
+
+  async UpdateMatch() {
+    this.serviceMatch.UpdateMatch();
+  }
+
+  async PlayCard() {
+    console.log(this.serviceMatch.UpdateMatch());
   }
 }
