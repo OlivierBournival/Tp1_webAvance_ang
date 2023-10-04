@@ -4,6 +4,7 @@ export class Card {
     public name: string,
     public attack: number,
     public defense: number,
-    public imageUrl: string
+    public imageUrl: string,
+    public carteDepart: boolean
   ) {}
 }
