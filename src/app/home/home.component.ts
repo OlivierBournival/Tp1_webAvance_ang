@@ -7,30 +7,37 @@ import { MatchServiceService } from '../services/matchService.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
   cards: Card[] = [];
   showModal = false;
 
-  constructor(public http: HttpClient, public serviceMatch : MatchServiceService) { }
+  constructor(
+    public http: HttpClient,
+    public serviceMatch: MatchServiceService
+  ) {}
 
   async ngOnInit() {
-    await this.getcards()
+    await this.getcards();
   }
 
-  // get all the card of  player.id 
+  // get all the cards from the server
   async getcards() {
-    console.log("objet card atendu : ");
-    let x = await lastValueFrom(this.http.get<Array<Card>>('https://localhost:7219/api/card/getallcards')); // this string is to be changed 
+    console.log('getcards...');
 
-    console.log(x);
-    let cardss: Card[] = []
-    for (let i = 0; i < x.length; i++) {
-      cardss.push(new Card(x[i].id, x[i].name, x[i].attack, x[i].defense, x[i].imageUrl));
-    }
-    console.log("objet card atendu : " + cardss[9].imageUrl);
-    this.cards = cardss;
+    let cards = await lastValueFrom(
+      this.http.get<Array<Card>>('https://localhost:7219/api/card/getallcards')
+    ).catch((error) => {
+      console.error(error);
+      throw Error(error.error?.message ?? 'Unknown error');
+    });
+
+    console.log(cards);
+
+    this.cards = cards;
+
+    console.log('getcards done');
   }
 
   openJoindreModal() {

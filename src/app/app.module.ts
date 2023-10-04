@@ -18,8 +18,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { JoindrePartieModalComponent } from './modals/joindrePartieModal/joindrePartieModal.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
-import { CardFormComponent } from './card-form/card-form.component';
-import { AdministrationComponent } from './administration/administration.component';
 import { ApiInterceptor } from './api.interceptor';
 
 @NgModule({
@@ -47,8 +45,8 @@ import { ApiInterceptor } from './api.interceptor';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
-    CookieService
+    CookieService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -2,34 +2,19 @@
   <div style="height: 45%;">
     <h1 style="position: absolute;">Adversaire</h1>
     <div style="display: flex; position: absolute; width: 100%; top: -100px;">
-
       <div class="container">
-    
         <app-card *ngFor="let card of enemycards" [show]="'back'" class="card"></app-card>
-    
       </div>
-    
     </div>
   </div>
   <div style="height: 45%;">
     <h1 style="position: absolute;">Mon jeu</h1>
-    
   </div>
 </div>
 <div style="display: flex;position: absolute; width: 100%; bottom: -70px;">
-
   <div class="container">
-
-    <app-card 
-      *ngFor="let card of mycards" 
-      [attack]="card.attack" 
-      [defense]="card.defense" 
-      [imageUrl]="card.imageUrl" 
-      [health]="card.defense" 
-      [name]="card.name"
-       class="card">
+    <app-card *ngFor="let card of mycards" [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl"
+      [health]="card.defense" [name]="card.name" class="card">
     </app-card>
-    
   </div>
-
 </div>

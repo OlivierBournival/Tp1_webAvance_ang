@@ -6,21 +6,22 @@ import { AuthentificationService } from 'src/app/services/authentification.servi
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
   hidePassword = true;
   hideConfirmation = true;
-  registerDTO: RegisterDTO = new RegisterDTO("", "", "");
+  registerDTO: RegisterDTO = new RegisterDTO('', '', '');
 
-  constructor(public authentificationService: AuthentificationService, public router: Router) { }
+  constructor(
+    public authentificationService: AuthentificationService,
+    public router: Router
+  ) {}
 
-  ngOnInit() {
-  }
-  
+  ngOnInit() {}
+
   async registerAction() {
     await this.authentificationService.register(this.registerDTO);
-    // go to /login
-    this.router.navigate(['/login']);
+    this.router.navigate(['/', this.authentificationService.email]);
   }
 }

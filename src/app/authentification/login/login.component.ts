@@ -6,24 +6,23 @@ import { AuthentificationService } from 'src/app/services/authentification.servi
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   hidePassword = true;
-  loginDTO: LoginDTO = new LoginDTO("", "");
-  message: string = "";
+  loginDTO: LoginDTO = new LoginDTO('', '');
+  message: string = '';
 
-  constructor(public authentificationService: AuthentificationService, public router: Router) { }
+  constructor(
+    public authentificationService: AuthentificationService,
+    public router: Router
+  ) {}
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   async loginAction() {
     try {
-      console.log("Logging in...")
       await this.authentificationService.login(this.loginDTO);
-      console.log("Logged in !")
       this.router.navigate(['/', this.authentificationService.email]);
     } catch (e: any) {
       this.message = e.message;
