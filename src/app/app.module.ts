@@ -10,7 +10,7 @@ import { CardComponent } from './card/card.component';
 import { MatchComponent } from './match/match.component';
 import { HomeComponent } from './home/home.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,6 +19,9 @@ import { JoindrePartieModalComponent } from './modals/joindrePartieModal/joindre
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ApiInterceptor } from './api.interceptor';
+import { MatInputModule } from '@angular/material/input';
+
+
 
 @NgModule({
   declarations: [
@@ -41,6 +44,8 @@ import { ApiInterceptor } from './api.interceptor';
     MatToolbarModule,
     MatProgressBarModule,
     FormsModule,
+    MatInputModule,
+    ReactiveFormsModule,
     MatDialogModule,
   ],
   providers: [
