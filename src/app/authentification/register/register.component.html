@@ -1,9 +1,7 @@
 <div
   style="width: 100%;height: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column">
   <mat-card style="margin: 16px; padding: 16px;">
-
     <form>
-
       <mat-form-field style="width: 100%">
         <input matInput type="email" placeholder="Courriel" name="email" [(ngModel)]="registerDTO.email">
       </mat-form-field>
@@ -22,10 +20,8 @@
           'visibility'}}</mat-icon>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" (click)="registerAction()">Enregistrer</button>
-
+      <button mat-raised-button color="primary" (click)="registerAction()">S'inscrire</button>
     </form>
   </mat-card>
-  <button mat-raised-button [routerLink]="['/login']" color="accent">Connecter</button>
-
+  <button mat-raised-button [routerLink]="['/login']" color="accent">Se connecter</button>
 </div>

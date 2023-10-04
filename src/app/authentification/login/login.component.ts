@@ -22,9 +22,7 @@ export class LoginComponent implements OnInit {
 
   async loginAction() {
     try {
-      console.log('Logging in...');
       await this.authentificationService.login(this.loginDTO);
-      console.log('Logged in !');
       this.router.navigate(['/', this.authentificationService.email]);
     } catch (e: any) {
       this.message = e.message;

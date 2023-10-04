@@ -19,6 +19,8 @@ export class AuthentificationService {
    * @throws {Error}
    */
   async register(registerDTO: RegisterDTO) {
+    console.log('Registering...');
+
     let result = await lastValueFrom(
       this.http.post<any>(this.accountBaseUrl + 'Register', registerDTO)
     ).catch((error) => {
@@ -27,13 +29,20 @@ export class AuthentificationService {
     });
 
     console.log(result);
+
+    console.log('Registered');
+
+    // auto login
+    await this.login(new LoginDTO(registerDTO.email, registerDTO.password));
   }
 
   /**
    * @throws {Error}
    */
   async login(loginDTO: LoginDTO): Promise<void> {
-    await lastValueFrom(
+    console.log('Logging in...');
+
+    const result = await lastValueFrom(
       this.http.post<any>(this.accountBaseUrl + 'Login', loginDTO, {
         withCredentials: true,
       })
@@ -42,10 +51,16 @@ export class AuthentificationService {
       throw Error(error.error?.message ?? 'Unknown error');
     });
 
+    console.log(result);
+
     localStorage.setItem('email', loginDTO.email);
+
+    console.log('Logged in');
   }
 
   async logout() {
+    console.log('Logging out...');
+
     const result = await lastValueFrom(
       this.http.get<any>(this.accountBaseUrl + 'Logout', {
         withCredentials: true,
@@ -56,6 +71,10 @@ export class AuthentificationService {
     });
 
     console.log(result);
+
+    localStorage.removeItem('email');
+
+    console.log('Logged out');
   }
 
   isConnected() {

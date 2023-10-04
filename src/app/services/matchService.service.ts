@@ -15,10 +15,18 @@ export class MatchServiceService {
   ) {}
 
   async joinMatch(): Promise<void> {
+    console.log('Joining match...');
+
     let x = await lastValueFrom(
       this.http.post<any>(domain + 'api/Match/JoinMatch', null)
-    );
+    ).catch((error) => {
+      console.error(error);
+      throw Error(error.error?.message ?? 'Unknown error');
+    });
+
     console.log(x);
+
+    console.log('Joined match');
   }
 
   async StartMatch(): Promise<void> {}
