@@ -10,23 +10,24 @@
       </mat-form-field>
 
       <mat-form-field style="width: 100%">
-        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password"  placeholder="Mot de passe" name="pass"
-          [(ngModel)]="registerDTO.password">
-    
-        <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' :
-          'visibility'}}</mat-icon>
-    
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Mot de passe" name="pass" [(ngModel)]="registerDTO.password">
+        <div style="display: flex; justify-content: flex-end; align-items: center;">
+          <mat-icon matTooltip="Password requirement">help</mat-icon>
+          <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' :
+            'visibility'}}</mat-icon>
+        </div>
       </mat-form-field>
+      
+      
  
 
       <mat-form-field style="width: 100%">
-        <input matInput [type]="hideConfirmation ? 'password' : 'text'" formControlName="passwordConfirm"  placeholder="Confirmation du mot de passe"
-          name="conf" [(ngModel)]="registerDTO.passwordConfirm">
-        <mat-icon matSuffix (click)="hideConfirmation = !hideConfirmation">{{hideConfirmation ? 'visibility_off' :
-          'visibility'}}</mat-icon>
+        <input matInput [type]="hideConfirmation ? 'password' : 'text'" formControlName="passwordConfirm" placeholder="Confirmation du mot de passe"
+          name="conf" [(ngModel)]="registerDTO.passwordConfirm" [class.wiggle]="RegisterForm.hasError('atLeastOneMistake')">
+        <mat-icon matSuffix (click)="hideConfirmation = !hideConfirmation">{{hideConfirmation ? 'visibility_off' : 'visibility'}}</mat-icon>
       </mat-form-field>
-      <mat-error *ngIf="RegisterForm.get('passwordConfirm')?.errors?.['passwordConfirmEqualsPassword']">
-        Vous devez avoir le meme mot de passe pour les deux champs
+      <mat-error *ngIf="RegisterForm.get('passwordConfirm')?.hasError('passwordConfirmEqualsPassword')">
+        Vous devez avoir le même mot de passe pour les deux champs
       </mat-error>
       <button mat-raised-button color="primary" (click)="registerAction()">S'inscrire</button>
     </form>

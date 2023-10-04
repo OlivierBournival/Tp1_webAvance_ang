@@ -20,6 +20,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ApiInterceptor } from './api.interceptor';
 import { MatInputModule } from '@angular/material/input';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
@@ -40,6 +41,7 @@ import { MatInputModule } from '@angular/material/input';
     MaterialModule,
     HttpClientModule,
     MatButtonModule,
+    MatTooltipModule,
     MatChipsModule,
     MatToolbarModule,
     MatProgressBarModule,
