@@ -24,8 +24,8 @@ export class AuthentificationService {
     let result = await lastValueFrom(
       this.http.post<any>(this.accountBaseUrl + 'Register', registerDTO)
     ).catch((error) => {
-      console.error(error);
-      throw Error(error.error?.message ?? 'Unknown error');
+      console.error(error.error.message);
+      throw Error(error.error.message ?? 'Unknown error');
     });
 
     console.log(result);
@@ -47,8 +47,8 @@ export class AuthentificationService {
         withCredentials: true,
       })
     ).catch((error) => {
-      console.error(error);
-      throw Error(error.error?.message ?? 'Unknown error');
+      console.error(error.error.message);
+      throw Error(error.error.message ?? 'Unknown error');
     });
 
     console.log(result);
@@ -66,8 +66,8 @@ export class AuthentificationService {
         withCredentials: true,
       })
     ).catch((error) => {
-      console.error(error);
-      throw Error(error.error?.message ?? 'Unknown error');
+      console.error(error.error.message);
+      throw Error(error.error.message ?? 'Unknown error');
     });
 
     console.log(result);

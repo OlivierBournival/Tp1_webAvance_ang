@@ -11,7 +11,6 @@ import { AuthentificationService } from 'src/app/services/authentification.servi
 export class LoginComponent implements OnInit {
   hidePassword = true;
   loginDTO: LoginDTO = new LoginDTO('', '');
-  message: string = '';
 
   constructor(
     public authentificationService: AuthentificationService,
@@ -21,11 +20,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   async loginAction() {
-    try {
-      await this.authentificationService.login(this.loginDTO);
-      this.router.navigate(['/', this.authentificationService.email]);
-    } catch (e: any) {
-      this.message = e.message;
-    }
+    await this.authentificationService.login(this.loginDTO);
+    this.router.navigate(['/', this.authentificationService.email]);
   }
 }

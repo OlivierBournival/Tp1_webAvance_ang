@@ -9,14 +9,13 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'TP1';
-  email = '';
 
   constructor(
     public authentificationService: AuthentificationService,
     public router: Router
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     if (!this.authentificationService.isConnected()) {
       this.router.navigate(['/login']);
     }
@@ -25,5 +24,9 @@ export class AppComponent implements OnInit {
   logout() {
     this.authentificationService.logout();
     this.router.navigate(['/login']);
+  }
+
+  get userEmail(): string {
+    return localStorage.getItem('email') + "";
   }
 }
