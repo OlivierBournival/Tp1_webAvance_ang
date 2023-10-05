@@ -22,6 +22,8 @@ export class MatchServiceService {
     
   ) { }
 
+  // Méthode qui s'occupe de la création du match et qui initalise le match et tous les composants dont on va avoir besoin.
+  
   async joinMatch(): Promise<boolean> {
     console.log('Joining match...');
 
@@ -39,27 +41,28 @@ export class MatchServiceService {
       return false;
     }
 
+    // Vérification pour savoir quel joueur on est.
     const isA = (data.playerA.name == this.authentificationService.email);
     const isB = (data.playerB.name == this.authentificationService.email);
 
+    // Vérificiation si on est bien dans la partie
     if (!isA && !isB)
     {
       console.error('You are not in this match');
       return false;
     }
 
-    this.setPlayerID(isA ? data.playerA.id : data.playerB.id);
+   
 
     // localStorage
     localStorage.setItem('match', JSON.stringify(data.match));
-    //A faire
-    //TODO : Être capable de savoir quel est quel joueur dans les data du match. Le garder dans un local storage pour le réutiliser plus tard.
-    localStorage.setItem('PlayerId', 'Todo')
+    this.setPlayerID(isA ? data.playerA.id : data.playerB.id);
 
     console.log('Joined match id : ' + data.match.id);
     return true;
   }
 
+  // Permet de commencer la recherche de match (La méthode est appelé tant que la fenêtre de recherche est ouverte)
   async StartMatch(): Promise<void> {
     const match = this.getMatch();
 
@@ -68,6 +71,7 @@ export class MatchServiceService {
     console.log(x);
   }
 
+  //TODO : Permet de jouer une carte
   async PlayCard(idcard: Number): Promise<void> {
     const match = this.getMatch();
 
@@ -75,39 +79,38 @@ export class MatchServiceService {
     console.log(x);
   }
 
+  // Appeler tous les X temps pour update le match au niveau client [Méthode la plus importante!]
   async UpdateMatch(): Promise<StartMatch | null> {
     const match = this.getMatch();
 
     try {
       const response = await lastValueFrom(this.http.get<string>(domain + 'api/Match/UpdateMatch/' + match.id + '/' + this.turnindex));
       
+
       if (response == null)
       {
         return null
       }
 
-      // Utilisez JSON.parse pour désérialiser la chaîne JSON en objet JavaScript
+      //Désérialization du JSON que le serveur envoie
       const jsonObject = JSON.parse(response) as StartMatch;
       
     
       console.log(jsonObject)
-
-      // Vous pouvez accéder au $type et aux Events ici
-
       console.log(jsonObject.$type)
       console.log(jsonObject.Events)
 
+      // Incrémentation de l'index pour que le serveur n'envoie pas la même action à nouveau.
       this.turnindex ++;
       return jsonObject
     } catch (error) {
-      // Gérez les erreurs ici
       throw error;
     }
   }
 
+  // Permet de récupérer une carte spécific
   async Getcard(id:number): Promise<Card>
   {
-                                                  /*'https://localhost:7219/api/card/getallcards'*/
     let x = await lastValueFrom(this.http.get<Card>('https://localhost:7219/api/card/GetCard/' + id));
 
     return x

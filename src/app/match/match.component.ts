@@ -27,16 +27,16 @@ export class MatchComponent implements OnInit {
 
   async UpdateMatch() {
       this.startMatch = await this.serviceMatch.UpdateMatch()
-      if (this.startMatch != null)
+      if (this.startMatch != null) //Si le match n'est pas update il se passe rien
       {
-    if(this.startMatch.$type == "StartMatch")
+    if(this.startMatch.$type == "StartMatch") //On regarde ce que c'est comme event pour ensuite adapter le jeu a la situation
     {
       for(let i =0; i< this.startMatch.Events.length; i++)
       {
         console.log(this.startMatch.Events[i].PlayerId)
         console.log(this.startMatch.Events[i])
         console.log(i)
-        if(localStorage.getItem('PlayerId') == this.startMatch.Events[i].PlayerId.toString())
+        if(this.serviceMatch.playerID == this.startMatch.Events[i].PlayerId) //On regarde le playerID pour savoir quel carte va a qui
         {
           this.mycards.push(await this.serviceMatch.Getcard(this.startMatch.Events[i].PlayableCardId))
         }
@@ -45,6 +45,10 @@ export class MatchComponent implements OnInit {
           this.enemycards.push(await this.serviceMatch.Getcard(this.startMatch.Events[i].PlayableCardId))
         }
       }
+    }
+    else if(false) // Autre event a rajouter ici , remplacer le "false" par le prochain event
+    {
+
     }
   }
 }
