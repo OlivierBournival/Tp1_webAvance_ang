@@ -13,6 +13,7 @@ const domain = 'https://localhost:7219/';
   providedIn: 'root',
 })
 export class MatchServiceService {
+  playerID: number | null = localStorage.getItem('playerID') == null ? null : parseInt(localStorage.getItem('playerID')!);
 
   turnindex:number = 0;
   constructor(
@@ -38,6 +39,17 @@ export class MatchServiceService {
       return false;
     }
 
+    const isA = (data.playerA.name == this.authentificationService.email);
+    const isB = (data.playerB.name == this.authentificationService.email);
+
+    if (!isA && !isB)
+    {
+      console.error('You are not in this match');
+      return false;
+    }
+
+    this.setPlayerID(isA ? data.playerA.id : data.playerB.id);
+
     // localStorage
     localStorage.setItem('match', JSON.stringify(data.match));
     //A faire
@@ -52,6 +64,7 @@ export class MatchServiceService {
     const match = this.getMatch();
 
     let x = await lastValueFrom(this.http.post<any>(domain + 'api/Match/StartMatch/' + match.id, null))
+
     console.log(x);
   }
 
@@ -103,5 +116,10 @@ export class MatchServiceService {
 
   getMatch(): Match {
     return JSON.parse(localStorage.getItem('match') + '');
+  }
+
+  setPlayerID(id: number) {
+    this.playerID = id;
+    localStorage.setItem('playerID', id + '');
   }
 }
