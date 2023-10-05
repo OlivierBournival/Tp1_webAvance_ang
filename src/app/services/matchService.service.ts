@@ -86,7 +86,8 @@ export class MatchServiceService {
     try {
       const response = await lastValueFrom(this.http.get<string>(domain + 'api/Match/UpdateMatch/' + match.id + '/' + this.turnindex));
       
-
+      console.log(this.turnindex)
+      console.log(response)
       if (response == null)
       {
         return null

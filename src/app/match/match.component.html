@@ -14,7 +14,7 @@
 <div style="display: flex;position: absolute; width: 100%; bottom: -70px;">
   <div class="container">
     <app-card *ngFor="let card of mycards" [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl"
-      [health]="card.defense" [name]="card.name" class="card">
+      [health]="card.defense" [name]="card.name" class="card" (click)="PlayCard(card)">
     </app-card>
   </div>
 </div>

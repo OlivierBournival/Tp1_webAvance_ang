@@ -25,10 +25,17 @@ export class MatchComponent implements OnInit {
     }, 5000);
   }
 
+  async PlayCard(card:Card) {
+    this.serviceMatch.PlayCard(card.id);
+
+  }
+
   async UpdateMatch() {
       this.startMatch = await this.serviceMatch.UpdateMatch()
+      console.log(this.startMatch)
       if (this.startMatch != null) //Si le match n'est pas update il se passe rien
       {
+        
     if(this.startMatch.$type == "StartMatch") //On regarde ce que c'est comme event pour ensuite adapter le jeu a la situation
     {
       for(let i =0; i< this.startMatch.Events.length; i++)
@@ -53,7 +60,4 @@ export class MatchComponent implements OnInit {
   }
 }
 
-  async PlayCard() {
-    console.log(this.serviceMatch.UpdateMatch());
-  }
 }
