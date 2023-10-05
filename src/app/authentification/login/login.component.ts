@@ -21,6 +21,6 @@ export class LoginComponent implements OnInit {
 
   async loginAction() {
     await this.authentificationService.login(this.loginDTO);
-    this.router.navigate(['/', this.authentificationService.email]);
+    this.router.navigate(['/', this.authentificationService.getEmail()]);
   }
 }

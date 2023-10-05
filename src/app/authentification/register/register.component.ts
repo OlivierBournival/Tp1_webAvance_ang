@@ -22,6 +22,6 @@ export class RegisterComponent implements OnInit {
 
   async registerAction() {
     await this.authentificationService.register(this.registerDTO);
-    this.router.navigate(['/', this.authentificationService.email]);
+    this.router.navigate(['/', this.authentificationService.getEmail()]);
   }
 }

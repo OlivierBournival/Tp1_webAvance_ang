@@ -25,8 +25,4 @@ export class AppComponent implements OnInit {
     this.authentificationService.logout();
     this.router.navigate(['/login']);
   }
-
-  get userEmail(): string {
-    return localStorage.getItem('email') + "";
-  }
 }

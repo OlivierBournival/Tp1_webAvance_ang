@@ -80,4 +80,8 @@ export class AuthentificationService {
   isConnected() {
     return this.cookieService.check('.AspNetCore.Identity.Application');
   }
+
+  getEmail() {
+    return localStorage.getItem('email');
+  }
 }
