@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatchServiceService } from '../services/matchService.service';
+import { Events, StartMatch } from '../models/events';
+import { Card } from '../models/Card';
 
 @Component({
   selector: 'app-match',
@@ -9,32 +11,43 @@ import { MatchServiceService } from '../services/matchService.service';
 export class MatchComponent implements OnInit {
   constructor(public serviceMatch: MatchServiceService) { }
 
-  mycards: any = [];
-  enemycards: any = [];
+
+  public update: Events = new Events('' , 0,0, [])
+  public startMatch: StartMatch | null = new StartMatch(' ', [])
+  mycards: Card[] = [];
+  enemycards: Card[] = [];
 
   ngOnInit() {
     this.serviceMatch.StartMatch()
 
-    let card = {
-      name: 'Jedi Chat',
-      attack: 2,
-      defense: 10,
-      imageUrl:
-        'https://images.squarespace-cdn.com/content/51b3dc8ee4b051b96ceb10de/1394662654865-JKOZ7ZFF39247VYDTGG9/hilarious-jedi-cats-fight-video-preview.jpg?content-type=image%2Fjpeg',
-    };
-    for (let i = 0; i < 4; i++) {
-      this.mycards.push(card);
-      this.enemycards.push(card);
-    }
-
     setInterval(() => {
       this.UpdateMatch();
-    }, 10000);
+    }, 5000);
   }
 
   async UpdateMatch() {
-    this.serviceMatch.UpdateMatch();
+      this.startMatch = await this.serviceMatch.UpdateMatch()
+      if (this.startMatch != null)
+      {
+    if(this.startMatch.$type == "StartMatch")
+    {
+      for(let i =0; i< this.startMatch.Events.length; i++)
+      {
+        console.log(this.startMatch.Events[i].PlayerId)
+        console.log(this.startMatch.Events[i])
+        console.log(i)
+        if(localStorage.getItem('PlayerId') == this.startMatch.Events[i].PlayerId.toString())
+        {
+          this.mycards.push(await this.serviceMatch.Getcard(this.startMatch.Events[i].PlayableCardId))
+        }
+        else
+        {
+          this.enemycards.push(await this.serviceMatch.Getcard(this.startMatch.Events[i].PlayableCardId))
+        }
+      }
+    }
   }
+}
 
   async PlayCard() {
     console.log(this.serviceMatch.UpdateMatch());

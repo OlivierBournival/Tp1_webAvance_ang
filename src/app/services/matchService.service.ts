@@ -5,6 +5,7 @@ import { AuthentificationService } from './authentification.service';
 import { Match } from '../models/Match';
 import { JoiningMatchData } from '../models/JoiningMatchData';
 import { StartMatch, Events } from '../models/events';
+import { Card } from '../models/Card';
 
 const domain = 'https://localhost:7219/';
 
@@ -13,9 +14,11 @@ const domain = 'https://localhost:7219/';
 })
 export class MatchServiceService {
 
+  turnindex:number = 0;
   constructor(
     public authentificationService: AuthentificationService,
     public http: HttpClient
+    
   ) { }
 
   async joinMatch(): Promise<boolean> {
@@ -37,6 +40,9 @@ export class MatchServiceService {
 
     // localStorage
     localStorage.setItem('match', JSON.stringify(data.match));
+    //A faire
+    //TODO : Être capable de savoir quel est quel joueur dans les data du match. Le garder dans un local storage pour le réutiliser plus tard.
+    localStorage.setItem('PlayerId', 'Todo')
 
     console.log('Joined match id : ' + data.match.id);
     return true;
@@ -56,13 +62,16 @@ export class MatchServiceService {
     console.log(x);
   }
 
-  async UpdateMatch(): Promise<void> {
+  async UpdateMatch(): Promise<StartMatch | null> {
     const match = this.getMatch();
 
-    let turnindex = 0;
     try {
-      const response = await lastValueFrom(this.http.get<string>(domain + 'api/Match/UpdateMatch/' + match.id + '/' + turnindex));
+      const response = await lastValueFrom(this.http.get<string>(domain + 'api/Match/UpdateMatch/' + match.id + '/' + this.turnindex));
       
+      if (response == null)
+      {
+        return null
+      }
 
       // Utilisez JSON.parse pour désérialiser la chaîne JSON en objet JavaScript
       const jsonObject = JSON.parse(response) as StartMatch;
@@ -74,11 +83,23 @@ export class MatchServiceService {
 
       console.log(jsonObject.$type)
       console.log(jsonObject.Events)
+
+      this.turnindex ++;
+      return jsonObject
     } catch (error) {
       // Gérez les erreurs ici
       throw error;
     }
   }
+
+  async Getcard(id:number): Promise<Card>
+  {
+                                                  /*'https://localhost:7219/api/card/getallcards'*/
+    let x = await lastValueFrom(this.http.get<Card>('https://localhost:7219/api/card/GetCard/' + id));
+
+    return x
+  }
+
 
   getMatch(): Match {
     return JSON.parse(localStorage.getItem('match') + '');
