@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MatchComponent implements OnInit {
   constructor() {}
-
+  playerHealthPercentage: number = 100;
+  enemyHealthPercentage: number = 40;
   mycards: any = [];
   enemycards: any = [];
 
