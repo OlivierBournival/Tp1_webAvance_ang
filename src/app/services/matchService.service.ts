@@ -4,6 +4,7 @@ import { lastValueFrom } from 'rxjs';
 import { AuthentificationService } from './authentification.service';
 import { Match } from '../models/Match';
 import { JoiningMatchData } from '../models/JoiningMatchData';
+import { StartMatch, Events } from '../models/events';
 
 const domain = 'https://localhost:7219/';
 
@@ -58,10 +59,25 @@ export class MatchServiceService {
   async UpdateMatch(): Promise<void> {
     const match = this.getMatch();
 
-    let turnindex = null;
+    let turnindex = 0;
+    try {
+      const response = await lastValueFrom(this.http.get<string>(domain + 'api/Match/UpdateMatch/' + match.id + '/' + turnindex));
+      
 
-    let x = await lastValueFrom(this.http.get<any>(domain + 'api/Match/UpdateMatch/' + match.id + '/' + turnindex))
-    console.log(x);
+      // Utilisez JSON.parse pour désérialiser la chaîne JSON en objet JavaScript
+      const jsonObject = JSON.parse(response) as StartMatch;
+      
+    
+      console.log(jsonObject)
+
+      // Vous pouvez accéder au $type et aux Events ici
+
+      console.log(jsonObject.$type)
+      console.log(jsonObject.Events)
+    } catch (error) {
+      // Gérez les erreurs ici
+      throw error;
+    }
   }
 
   getMatch(): Match {
