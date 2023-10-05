@@ -30,7 +30,7 @@ export class MatchServiceService {
     const data: JoiningMatchData = await lastValueFrom(
       this.http.post<any>(domain + 'api/Match/JoinMatch', null)
     ).catch((error) => {
-      console.error(error);
+      console.error(error.error.message);
       return null;
     });
 
