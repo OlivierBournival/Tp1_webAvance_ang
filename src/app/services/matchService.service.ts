@@ -52,6 +52,7 @@ export class MatchServiceService {
     // localStorage
     localStorage.setItem('match', JSON.stringify(data.match));
     this.setPlayerID(isA ? data.playerA.id : data.playerB.id);
+    localStorage.setItem('enemyEmail', isA ? data.playerB.name : data.playerA.name);
 
     console.log('Joined match id : ' + data.match.id);
     return true;
@@ -119,5 +120,9 @@ export class MatchServiceService {
   setPlayerID(id: number) {
     this.playerID = id;
     localStorage.setItem('playerID', id + '');
+  }
+
+  get enemyEmail(): string {
+    return localStorage.getItem('enemyEmail') + '';
   }
 }

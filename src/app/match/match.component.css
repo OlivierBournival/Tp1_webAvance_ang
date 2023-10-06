@@ -1,14 +1,15 @@
 .board {
-    height: 100%;
-    transform: perspective(100vh) rotateX(30deg);
+  height: 100%;
+  transform: scale(.8) perspective(100vh) rotateX(30deg);
+  background-size: cover;
+  background-image: url('/assets/mergedBoardImage.png');
 }
  
 .container {
-    position: relative;
-    height: 300px;
-    display: flex;
-    margin: auto;
-    transform: scale(0.7) translateY(-90px);
+  position: relative;
+  display: flex;
+  margin: auto;
+  transform: scale(0.7) translateY(-90px);
 }
   
 .card {
@@ -36,4 +37,11 @@
   position: relative;
   left: 50px;
   transition: 0.4s ease-out;
+}
+
+.health {
+  background-color: #f3e600;
+  height: 30px;
+  position: absolute;
+  top: 0;
 }

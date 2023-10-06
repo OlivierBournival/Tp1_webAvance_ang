@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatchServiceService } from '../services/matchService.service';
 import { Events, StartMatch } from '../models/events';
 import { Card } from '../models/Card';
+import { AuthentificationService } from '../services/authentification.service';
 
 @Component({
   selector: 'app-match',
@@ -16,7 +17,7 @@ export class MatchComponent implements OnInit {
   playerHealthPercentage: number = 100;
   enemyHealthPercentage: number = 100;
 
-  constructor(public serviceMatch: MatchServiceService) { }
+  constructor(public serviceMatch: MatchServiceService, public authentificationService: AuthentificationService) { }
 
   ngOnInit() {
     this.serviceMatch.StartMatch()
