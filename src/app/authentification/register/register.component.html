@@ -15,7 +15,7 @@
         <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password"
           placeholder="Mot de passe" name="pass" [(ngModel)]="registerDTO.password">
         <div style="display: flex; justify-content: flex-end; align-items: center;">
-          <mat-icon matTooltip="Password requirement">help</mat-icon>
+          <mat-icon matTooltip="Password need one capital letter , one number and one symbol ">help</mat-icon>
           <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' :
             'visibility'}}</mat-icon>
         </div>
