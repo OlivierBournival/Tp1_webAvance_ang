@@ -39,7 +39,7 @@ export class AuthentificationService {
   /**
    * @throws {Error}
    */
-  async login(loginDTO: LoginDTO): Promise<void> {
+  async login(loginDTO: LoginDTO) {
     console.log('Logging in...');
 
     const result = await lastValueFrom(
