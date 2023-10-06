@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
     console.log('getcards...');
 
     let cards = await lastValueFrom(
-      this.http.get<Array<Card>>('https://localhost:7219/api/card/getallcards')
+      this.http.get<Array<Card>>('https://localhost:7219/api/card/GetCardsFromPlayer')
     ).catch((error) => {
       console.error(error);
       throw Error(error.error?.message ?? 'Unknown error');
