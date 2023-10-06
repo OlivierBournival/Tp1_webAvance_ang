@@ -10,7 +10,7 @@ import { Card } from '../models/Card';
 })
 export class MatchComponent implements OnInit {
   public update: Events = new Events('' , 0,0, [])
-  public startMatch: StartMatch | null = new StartMatch(' ', [])
+  public startMatch: Events[] | null = []
   mycards: Card[] = [];
   enemycards: Card[] = [];
   playerHealthPercentage: number = 100;
@@ -36,21 +36,22 @@ export class MatchComponent implements OnInit {
       console.log(this.startMatch)
       if (this.startMatch != null) //Si le match n'est pas update il se passe rien
       {
-        
-    if(this.startMatch.$type == "StartMatch") //On regarde ce que c'est comme event pour ensuite adapter le jeu a la situation
+   for(let i = 0;i< this.startMatch.length; i++)
+   {
+    if(this.startMatch[i].$type == "StartMatch") //On regarde ce que c'est comme event pour ensuite adapter le jeu a la situation
     {
-      for(let i =0; i< this.startMatch.Events.length; i++)
+      for(let i =0; i< this.startMatch[i].Events.length; i++)
       {
-        console.log(this.startMatch.Events[i].PlayerId)
-        console.log(this.startMatch.Events[i])
+        console.log(this.startMatch[i].Events[i].PlayerId)
+        console.log(this.startMatch[i].Events[i])
         console.log(i)
-        if(this.serviceMatch.playerID == this.startMatch.Events[i].PlayerId) //On regarde le playerID pour savoir quel carte va a qui
+        if(this.serviceMatch.playerID == this.startMatch[i].Events[i].PlayerId) //On regarde le playerID pour savoir quel carte va a qui
         {
-          this.mycards.push(await this.serviceMatch.Getcard(this.startMatch.Events[i].PlayableCardId))
+          this.mycards.push(await this.serviceMatch.Getcard(this.startMatch[i].Events[i].PlayableCardId))
         }
         else
         {
-          this.enemycards.push(await this.serviceMatch.Getcard(this.startMatch.Events[i].PlayableCardId))
+          this.enemycards.push(await this.serviceMatch.Getcard(this.startMatch[i].Events[i].PlayableCardId))
         }
       }
     }
@@ -58,6 +59,7 @@ export class MatchComponent implements OnInit {
     {
 
     }
+  }     
   }
 }
 
