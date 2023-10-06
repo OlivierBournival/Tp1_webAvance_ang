@@ -76,7 +76,7 @@ export class MatchServiceService {
   }
 
   // Appeler tous les X temps pour update le match au niveau client [Méthode la plus importante!]
-  async UpdateMatch(): Promise<Events[] | null> {
+  async UpdateMatch(): Promise<StartMatch | null> {
     const match = this.getMatch();
 
     try {
@@ -90,11 +90,8 @@ export class MatchServiceService {
       }
 
       //Désérialization du JSON que le serveur envoie
-      const jsonObject = JSON.parse(response) as Events[];
+      const jsonObject = JSON.parse(response) as StartMatch;
       
-    
-      console.log(jsonObject)
-      console.log(jsonObject)
       console.log(jsonObject)
 
       // Incrémentation de l'index pour que le serveur n'envoie pas la même action à nouveau.
