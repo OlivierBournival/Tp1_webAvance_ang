@@ -1,24 +1,28 @@
-
 <div
-  style="width: 100%;height: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column" class="background">
+  style="width: 100%;height: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column"
+  class="background">
   <mat-card style="margin: 16px;padding: 16px;">
     <form [formGroup]="LoginForm">
       <mat-form-field style="width: 100%">
-        <input matInput type="email" placeholder="Courriel" formControlName="Email" name="Email" [(ngModel)]="loginDTO.email">
-        <mat-error *ngIf="LoginForm.get('Email')?.errors?.['invalidEmail']">
-          Vous devez mettre un email valide
+        <input matInput type="email" placeholder="Courriel" formControlName="email" name="email"
+          [(ngModel)]="loginDTO.email">
+        <mat-error *ngIf="LoginForm.get('email')?.errors?.['email']">
+          L'adresse email n'est pas valide !
         </mat-error>
       </mat-form-field>
+
       <mat-form-field style="width: 100%">
-        <input matInput  formControlName="password" [type]="hidePassword ? 'password' : 'text'" placeholder="Mot de passe" name="pass"
-          [(ngModel)]="loginDTO.password">
+        <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'"
+          placeholder="Mot de passe" name="password" [(ngModel)]="loginDTO.password">
         <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' :
           'visibility'}}</mat-icon>
-          <mat-error *ngIf="LoginForm.get('password')?.errors?.['passwordlength']">
-            Vous devez mettre un password valide
-          </mat-error>
+        <mat-error *ngIf="LoginForm.get('password')?.errors?.['passwordlength']">
+          Le mot de passe n'est pas valide !
+        </mat-error>
       </mat-form-field>
-      <button mat-raised-button color="primary" (click)="loginAction()">Se connecter</button>
+
+      <button mat-raised-button color="primary" (click)="loginAction()" [disabled]="LoginForm.invalid">Se
+        connecter</button>
     </form>
   </mat-card>
   <button mat-raised-button [routerLink]="['/register']" color="accent">S'inscrire</button>

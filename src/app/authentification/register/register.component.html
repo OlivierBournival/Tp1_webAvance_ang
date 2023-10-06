@@ -1,35 +1,39 @@
 <div
-  style="width: 100%;height: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column" class="background">
+  style="width: 100%;height: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column"
+  class="background">
   <mat-card style="margin: 16px; padding: 16px;">
     <form [formGroup]="RegisterForm">
       <mat-form-field style="width: 100%">
-        <input matInput type="email" placeholder="Courriel" name="email" formControlName="Email"  [(ngModel)]="registerDTO.email">
-        <mat-error *ngIf="RegisterForm.get('Email')?.errors?.['invalidEmail']">
-          Vous devez mettre un email valide
+        <input matInput type="email" placeholder="Courriel" formControlName="email" name="email"
+          [(ngModel)]="registerDTO.email">
+        <mat-error *ngIf="RegisterForm.get('email')?.errors?.['email']">
+          L'adresse email n'est pas valide !
         </mat-error>
       </mat-form-field>
 
       <mat-form-field style="width: 100%">
-        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Mot de passe" name="pass" [(ngModel)]="registerDTO.password">
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password"
+          placeholder="Mot de passe" name="pass" [(ngModel)]="registerDTO.password">
         <div style="display: flex; justify-content: flex-end; align-items: center;">
           <mat-icon matTooltip="Password requirement">help</mat-icon>
           <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' :
             'visibility'}}</mat-icon>
         </div>
       </mat-form-field>
-      
-      
- 
 
       <mat-form-field style="width: 100%">
-        <input matInput [type]="hideConfirmation ? 'password' : 'text'" formControlName="passwordConfirm" placeholder="Confirmation du mot de passe"
-          name="conf" [(ngModel)]="registerDTO.passwordConfirm" [class.wiggle]="RegisterForm.hasError('atLeastOneMistake')">
-        <mat-icon matSuffix (click)="hideConfirmation = !hideConfirmation">{{hideConfirmation ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <input matInput [type]="hideConfirmation ? 'password' : 'text'" formControlName="passwordConfirm"
+          placeholder="Confirmation du mot de passe" name="conf" [(ngModel)]="registerDTO.passwordConfirm"
+          [class.wiggle]="RegisterForm.hasError('atLeastOneMistake')">
+        <mat-icon matSuffix (click)="hideConfirmation = !hideConfirmation">{{hideConfirmation ? 'visibility_off' :
+          'visibility'}}</mat-icon>
       </mat-form-field>
+      
       <mat-error *ngIf="RegisterForm.get('passwordConfirm')?.hasError('passwordConfirmEqualsPassword')">
-        Vous devez avoir le même mot de passe pour les deux champs
+        Les deux mots de passe ne concordent pas !
       </mat-error>
-      <button mat-raised-button color="primary" (click)="registerAction()">S'inscrire</button>
+
+      <button mat-raised-button color="primary" (click)="registerAction()" [disabled]="RegisterForm.invalid">S'inscrire</button>
     </form>
   </mat-card>
   <button mat-raised-button [routerLink]="['/login']" color="accent">Se connecter</button>
