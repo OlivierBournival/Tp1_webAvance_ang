@@ -21,6 +21,10 @@
         </mat-error>
       </mat-form-field>
 
+      <mat-error *ngIf="networkError">
+        {{message}}
+      </mat-error>
+
       <button mat-raised-button color="primary" (click)="loginAction()" [disabled]="LoginForm.invalid">Se
         connecter</button>
     </form>

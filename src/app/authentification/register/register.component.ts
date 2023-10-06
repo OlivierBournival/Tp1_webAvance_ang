@@ -28,6 +28,8 @@ export class RegisterComponent implements OnInit {
   RegisterForm: FormGroup<any>;
   RegisterData: LoginData | null = null;
   OValidator: any;
+  message: string = '';
+  networkError: boolean = false;
 
   constructor(
     public authentificationService: AuthentificationService,
@@ -70,7 +72,13 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {}
 
   async registerAction() {
-    await this.authentificationService.register(this.registerDTO);
-    this.router.navigate(['/', this.authentificationService.getEmail()]);
+    try {
+      await this.authentificationService.register(this.registerDTO);
+      this.router.navigate(['/', this.authentificationService.getEmail()]);
+    } catch (x: any) {
+      console.error(x);
+      this.message = x.error.message;
+      this.networkError = true;
+    }
   }
 }

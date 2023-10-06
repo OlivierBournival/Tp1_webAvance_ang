@@ -33,6 +33,10 @@
         Les deux mots de passe ne concordent pas !
       </mat-error>
 
+      <mat-error *ngIf="networkError">
+        {{message}}
+      </mat-error>
+
       <button mat-raised-button color="primary" (click)="registerAction()" [disabled]="RegisterForm.invalid">S'inscrire</button>
     </form>
   </mat-card>
