@@ -6,7 +6,8 @@
 
 <!-- modal joindreModal -->
 <app-joindrePartieModal class="modal-container" *ngIf="showModal" (close)="!showModal"
-  (closeModal)="closeJoindreModal()"></app-joindrePartieModal>
+  (closeModal)="closeJoindreModal()" [errorMessage]="errorMessage">
+</app-joindrePartieModal>
 
 <mat-toolbar class="mat-toolbar mat-toolbar-single-row">
   <span>Mes cartes</span>

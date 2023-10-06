@@ -29,10 +29,7 @@ export class MatchServiceService {
 
     const data: JoiningMatchData = await lastValueFrom(
       this.http.post<any>(domain + 'api/Match/JoinMatch', null)
-    ).catch((error) => {
-      console.error(error.error.message);
-      return null;
-    });
+    );
 
     console.log(data);
     
@@ -51,8 +48,6 @@ export class MatchServiceService {
       console.error('You are not in this match');
       return false;
     }
-
-   
 
     // localStorage
     localStorage.setItem('match', JSON.stringify(data.match));
