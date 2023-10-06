@@ -24,8 +24,8 @@ export class AuthentificationService {
     let result = await lastValueFrom(
       this.http.post<any>(this.accountBaseUrl + 'Register', registerDTO)
     ).catch((error) => {
-      console.error(error);
-      throw Error(error.error?.message ?? 'Unknown error');
+      console.error(error.error.message);
+      throw Error(error.error.message ?? 'Unknown error');
     });
 
     console.log(result);
@@ -39,7 +39,7 @@ export class AuthentificationService {
   /**
    * @throws {Error}
    */
-  async login(loginDTO: LoginDTO): Promise<void> {
+  async login(loginDTO: LoginDTO) {
     console.log('Logging in...');
 
     const result = await lastValueFrom(
@@ -47,8 +47,8 @@ export class AuthentificationService {
         withCredentials: true,
       })
     ).catch((error) => {
-      console.error(error);
-      throw Error(error.error?.message ?? 'Unknown error');
+      console.error(error.error.message);
+      throw Error(error.error.message ?? 'Unknown error');
     });
 
     console.log(result);
@@ -66,8 +66,8 @@ export class AuthentificationService {
         withCredentials: true,
       })
     ).catch((error) => {
-      console.error(error);
-      throw Error(error.error?.message ?? 'Unknown error');
+      console.error(error.error.message);
+      throw Error(error.error.message ?? 'Unknown error');
     });
 
     console.log(result);
@@ -79,5 +79,9 @@ export class AuthentificationService {
 
   isConnected() {
     return this.cookieService.check('.AspNetCore.Identity.Application');
+  }
+
+  getEmail() {
+    return localStorage.getItem('email');
   }
 }

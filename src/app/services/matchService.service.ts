@@ -2,6 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { AuthentificationService } from './authentification.service';
+import { Match } from '../models/Match';
+import { JoiningMatchData } from '../models/JoiningMatchData';
+import { StartMatch, Events } from '../models/events';
+import { Card } from '../models/Card';
 
 const domain = 'https://localhost:7219/';
 
@@ -9,29 +13,116 @@ const domain = 'https://localhost:7219/';
   providedIn: 'root',
 })
 export class MatchServiceService {
+  playerID: number | null = localStorage.getItem('playerID') == null ? null : parseInt(localStorage.getItem('playerID')!);
+
+  turnindex:number = 0;
   constructor(
     public authentificationService: AuthentificationService,
     public http: HttpClient
-  ) {}
+    
+  ) { }
 
-  async joinMatch(): Promise<void> {
+  // Méthode qui s'occupe de la création du match et qui initalise le match et tous les composants dont on va avoir besoin.
+  
+  async joinMatch(): Promise<boolean> {
     console.log('Joining match...');
 
-    let x = await lastValueFrom(
+    const data: JoiningMatchData = await lastValueFrom(
       this.http.post<any>(domain + 'api/Match/JoinMatch', null)
     ).catch((error) => {
-      console.error(error);
-      throw Error(error.error?.message ?? 'Unknown error');
+      console.error(error.error.message);
+      return null;
     });
 
-    console.log(x);
+    console.log(data);
+    
+    if (data == null)
+    {
+      return false;
+    }
 
-    console.log('Joined match');
+    // Vérification pour savoir quel joueur on est.
+    const isA = (data.playerA.name == this.authentificationService.email);
+    const isB = (data.playerB.name == this.authentificationService.email);
+
+    // Vérificiation si on est bien dans la partie
+    if (!isA && !isB)
+    {
+      console.error('You are not in this match');
+      return false;
+    }
+
+   
+
+    // localStorage
+    localStorage.setItem('match', JSON.stringify(data.match));
+    this.setPlayerID(isA ? data.playerA.id : data.playerB.id);
+
+    console.log('Joined match id : ' + data.match.id);
+    return true;
   }
 
-  async StartMatch(): Promise<void> {}
+  // Permet de commencer la recherche de match (La méthode est appelé tant que la fenêtre de recherche est ouverte)
+  async StartMatch(): Promise<void> {
+    const match = this.getMatch();
 
-  async PlayCard(): Promise<void> {}
+    let x = await lastValueFrom(this.http.post<any>(domain + 'api/Match/StartMatch/' + match.id, null))
 
-  async UpdateMatch(): Promise<void> {}
+    console.log(x);
+  }
+
+  //TODO : Permet de jouer une carte
+  async PlayCard(idcard: Number): Promise<void> {
+    const match = this.getMatch();
+
+    let x = await lastValueFrom(this.http.post<any>(domain + 'api/Match/PlayCard/' + match.id + '/' + idcard, null))
+    console.log(x);
+  }
+
+  // Appeler tous les X temps pour update le match au niveau client [Méthode la plus importante!]
+  async UpdateMatch(): Promise<StartMatch | null> {
+    const match = this.getMatch();
+
+    try {
+      const response = await lastValueFrom(this.http.get<string>(domain + 'api/Match/UpdateMatch/' + match.id + '/' + this.turnindex));
+      
+
+      if (response == null)
+      {
+        return null
+      }
+
+      //Désérialization du JSON que le serveur envoie
+      const jsonObject = JSON.parse(response) as StartMatch;
+      
+    
+      console.log(jsonObject)
+      console.log(jsonObject.$type)
+      console.log(jsonObject.Events)
+
+      // Incrémentation de l'index pour que le serveur n'envoie pas la même action à nouveau.
+      this.turnindex ++;
+      return jsonObject
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // Permet de récupérer une carte spécific
+  async Getcard(id:number): Promise<Card>
+  {
+    let x = await lastValueFrom(this.http.get<Card>('https://localhost:7219/api/card/GetCard/' + id));
+
+    return x
+  }
+
+
+  getMatch(): Match {
+    return JSON.parse(localStorage.getItem('match') + '');
+  }
+
+  setPlayerID(id: number) {
+    this.playerID = id;
+    localStorage.setItem('playerID', id + '');
+  }
 }
