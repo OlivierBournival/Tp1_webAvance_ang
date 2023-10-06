@@ -3,6 +3,7 @@
     <h1 style="position: absolute;">Adversaire</h1>
     <div style="position: absolute; top: 40px; left: 10px; width: 200px; height: 20px;" [ngStyle]="{'background-color': enemyHealthPercentage >= 50 ? 'green' : 'red', 'border-radius': '5px'}">
       <div [style.width.%]="enemyHealthPercentage" style="height: 100%; border-radius: 5px;">
+
         <span style="display: block; text-align: center; line-height: 20px; color: white;">{{ enemyHealthPercentage }}%</span>
       </div>
     </div>
