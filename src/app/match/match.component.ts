@@ -9,13 +9,14 @@ import { Card } from '../models/Card';
   styleUrls: ['./match.component.css'],
 })
 export class MatchComponent implements OnInit {
-  constructor(public serviceMatch: MatchServiceService) { }
-
-
   public update: Events = new Events('' , 0,0, [])
   public startMatch: StartMatch | null = new StartMatch(' ', [])
   mycards: Card[] = [];
   enemycards: Card[] = [];
+  playerHealthPercentage: number = 100;
+  enemyHealthPercentage: number = 100;
+
+  constructor(public serviceMatch: MatchServiceService) { }
 
   ngOnInit() {
     this.serviceMatch.StartMatch()

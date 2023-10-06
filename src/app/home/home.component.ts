@@ -13,12 +13,13 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   cards: Card[] = [];
   showModal = false;
+  errorMessage: string = '';
 
   constructor(
     public http: HttpClient,
     public serviceMatch: MatchServiceService,
     public router: Router
-  ) { }
+  ) {}
 
   async ngOnInit() {
     await this.getcards();
@@ -47,12 +48,12 @@ export class HomeComponent implements OnInit {
 
     let joined = false;
 
-    while (!joined) {
+    while (!joined && this.showModal) {
       try {
         joined = await this.serviceMatch.joinMatch();
-      }
-      catch (x: any) {
-
+      } catch (x: any) {
+        console.error(x);
+        this.errorMessage = x.message;
       }
 
       if (joined) {
@@ -62,11 +63,10 @@ export class HomeComponent implements OnInit {
 
       await this.delay(1000);
     }
-
   }
 
   async delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   closeJoindreModal() {

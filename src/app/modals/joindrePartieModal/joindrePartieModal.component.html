@@ -2,6 +2,10 @@
   <mat-progress-bar role="progressbar" aria-valuemin="0" aria-valuemax="100" tabindex="-1" mode="indeterminate">
   </mat-progress-bar>
   <h3>En attente pour un autre super player...</h3>
+  <mat-error *ngIf="errorMessage !== ''">
+    {{errorMessage}}
+  </mat-error>
+  <br>
   <button class="mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base" (click)="closeModal()">
     Cancel
   </button>

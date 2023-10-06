@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class JoindrePartieModalComponent implements OnInit {
   @Output('closeModal') parentCloseModal: EventEmitter<any> =
     new EventEmitter();
-  message: string = '';
+  @Input('errorMessage') errorMessage: string = '';
 
   ngOnInit() {}
 
