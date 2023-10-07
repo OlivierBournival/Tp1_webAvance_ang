@@ -4,12 +4,13 @@ import { lastValueFrom } from 'rxjs';
 import { LoginDTO } from '../DTO/LoginDTO';
 import { RegisterDTO } from '../DTO/RegisterDTO';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthentificationService {
-  baseUrl = 'https://localhost:7219/api/';
+  baseUrl = environment.apiUrl;
   accountBaseUrl = this.baseUrl + 'Account/';
   email = localStorage.getItem('email');
 

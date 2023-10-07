@@ -6,8 +6,9 @@ import { Match } from '../models/Match';
 import { JoiningMatchData } from '../models/JoiningMatchData';
 import { StartMatch, Events } from '../models/events';
 import { Card } from '../models/Card';
+import { environment } from 'src/environments/environment.development';
 
-const domain = 'https://localhost:7219/';
+const domain = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root',
@@ -106,7 +107,7 @@ export class MatchServiceService {
   // Permet de récupérer une carte spécific
   async Getcard(id:number): Promise<Card>
   {
-    let x = await lastValueFrom(this.http.get<Card>('https://localhost:7219/api/card/GetCard/' + id));
+    let x = await lastValueFrom(this.http.get<Card>(domain + '/api/card/GetCard/' + id));
 
     return x
   }

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { MatchServiceService } from '../services/matchService.service';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ export class HomeComponent implements OnInit {
   cards: Card[] = [];
   showModal = false;
   errorMessage: string = '';
+  domain: string = environment.apiUrl
 
   constructor(
     public http: HttpClient,
@@ -30,7 +32,7 @@ export class HomeComponent implements OnInit {
     console.log('getcards...');
 
     let cards = await lastValueFrom(
-      this.http.get<Array<Card>>('https://localhost:7219/api/card/GetCardsFromPlayer')
+      this.http.get<Array<Card>>(this.domain + '/api/card/GetCardsFromPlayer')
     ).catch((error) => {
       console.error(error);
       throw Error(error.error?.message ?? 'Unknown error');
