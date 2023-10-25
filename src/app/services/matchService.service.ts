@@ -107,7 +107,7 @@ export class MatchServiceService {
   // Permet de récupérer une carte spécific
   async Getcard(id:number): Promise<Card>
   {
-    let x = await lastValueFrom(this.http.get<Card>(domain + '/api/card/GetCard/' + id));
+    let x = await lastValueFrom(this.http.get<Card>(domain + 'api/card/GetCard/' + id));
 
     return x
   }

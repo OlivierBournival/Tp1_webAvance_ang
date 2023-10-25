@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
     console.log('getcards...');
 
     let cards = await lastValueFrom(
-      this.http.get<Array<Card>>(this.domain + '/api/card/GetCardsFromPlayer')
+      this.http.get<Array<Card>>(this.domain + 'api/card/GetCardsFromPlayer')
     ).catch((error) => {
       console.error(error);
       throw Error(error.error?.message ?? 'Unknown error');
@@ -73,5 +73,9 @@ export class HomeComponent implements OnInit {
 
   closeJoindreModal() {
     this.showModal = false;
+  }
+
+  Magasin() {
+    this.router.navigate(['/magasin']);
   }
 }

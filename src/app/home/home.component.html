@@ -5,9 +5,8 @@
 </div>
 
 <!-- modal joindreModal -->
-<app-joindrePartieModal class="modal-container" *ngIf="showModal" (close)="!showModal"
-  (closeModal)="closeJoindreModal()" [errorMessage]="errorMessage">
-</app-joindrePartieModal>
+
+<button mat-raised-button color="warn"  (click)="Magasin()">Magasin</button>
 
 <mat-toolbar class="mat-toolbar mat-toolbar-single-row">
   <span>Mes cartes</span>

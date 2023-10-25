@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment.development';
 })
 export class AuthentificationService {
   baseUrl = environment.apiUrl;
-  accountBaseUrl = this.baseUrl + 'Account/';
+  accountBaseUrl = this.baseUrl + 'api/Account/';
   email = localStorage.getItem('email');
 
   constructor(public http: HttpClient, public cookieService: CookieService) {}
