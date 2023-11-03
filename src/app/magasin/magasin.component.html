@@ -1,0 +1,36 @@
+<mat-toolbar class="mat-toolbar mat-toolbar-single-row">
+    <span> A Vendre </span>
+</mat-toolbar>
+
+<div style="display: flex; flex-direction: row; height: 100%;">
+    <div style="display: flex; flex-direction: column; width: 80%;">
+
+        <h1 class="Rabait-du-moment">Rabait du moment!</h1>
+        <div style="display: flex; flex-direction: row;">
+            <app-card style="padding: 5px;" [attack]="cards[10].attack" [defense]="cards[10].defense" [imageUrl]="cards[0].imageUrl"
+                [health]="cards[10].defense" [name]="cards[10].name"></app-card>
+            <app-card style="padding: 5px;" [attack]="cards[1].attack" [defense]="cards[1].defense" [imageUrl]="cards[1].imageUrl"
+                [health]="cards[1].defense" [name]="cards[1].name"></app-card>
+            <app-card style="padding: 5px;" [attack]="cards[2].attack" [defense]="cards[2].defense" [imageUrl]="cards[2].imageUrl"
+                [health]="cards[2].defense" [name]="cards[2].name"></app-card>
+        </div>
+
+        <h1 class="Toute-les-carte">Toute les cartes:</h1>
+        <div style="padding: 10px;  display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between;">
+            <app-card *ngFor="let card of cards" style="padding: 5px;" [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl"
+                [health]="card.defense" [name]="card.name"></app-card>
+                
+        </div>
+
+    </div>
+
+    <div class="Rabais-en-bulk" style="padding: 10px; display: flex; flex-direction: column; width: 20%;">
+        <h1>Rabais en bulk</h1>
+        <app-card style="padding: 5px;" [attack]="cards[10].attack" [defense]="cards[10].defense" [imageUrl]="cards[10].imageUrl"
+            [health]="cards[10].defense" [name]="cards[0].name"></app-card>
+        <app-card style="padding: 5px;" [attack]="cards[1].attack" [defense]="cards[1].defense" [imageUrl]="cards[1].imageUrl"
+            [health]="cards[1].defense" [name]="cards[1].name"></app-card>
+        <app-card style="padding: 5px;" [attack]="cards[2].attack" [defense]="cards[2].defense" [imageUrl]="cards[2].imageUrl"
+            [health]="cards[2].defense" [name]="cards[2].name"></app-card>
+    </div>
+</div>

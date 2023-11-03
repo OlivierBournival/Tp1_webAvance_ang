@@ -8,6 +8,7 @@
         *ngIf="this.authentificationService.isConnected()">{{this.authentificationService.getEmail()}}</mat-chip>
     <button mat-raised-button color="warn" *ngIf="this.authentificationService.isConnected()" (click)="logout()">Se
         déconnecter</button>
+        <button mat-raised-button color="warn"  (click)="Magasin()">Magasin</button>
 </mat-toolbar>
 
 <router-outlet></router-outlet>
