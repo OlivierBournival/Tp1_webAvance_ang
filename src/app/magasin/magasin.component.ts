@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Card } from '../models/Card';
+import { Card, CardMagasin } from '../models/Card';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { MatchServiceService } from '../services/matchService.service';
@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment.development';
   styleUrls: ['./magasin.component.css']
 })
 export class MagasinComponent implements OnInit {
-  cards: Card[] = [];
+  cards: CardMagasin[] = [];
   showModal = false;
   errorMessage: string = '';
   domain: string = environment.apiUrl
@@ -32,7 +32,7 @@ export class MagasinComponent implements OnInit {
     console.log('getcards...');  
 
     let cards = await lastValueFrom(
-      this.http.get<Array<Card>>(this.domain + 'api/CardService/getallcards')
+      this.http.get<Array<CardMagasin>>(this.domain + 'api/CardService/getallcards')
     ).catch((error) => {
       console.error(error);
       throw Error(error.error?.message ?? 'Unknown error');

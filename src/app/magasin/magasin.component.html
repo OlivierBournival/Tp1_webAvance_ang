@@ -1,36 +1,61 @@
+
+
 <mat-toolbar class="mat-toolbar mat-toolbar-single-row">
     <span> A Vendre </span>
 </mat-toolbar>
 
 <div style="display: flex; flex-direction: row; height: 100%;">
-    <div style="display: flex; flex-direction: column; width: 80%;">
+    <div style="display: flex; flex-direction: column; width: 80%;  padding: 10px;">
 
         <h1 class="Rabait-du-moment">Rabait du moment!</h1>
-        <div style="display: flex; flex-direction: row;">
-            <app-card style="padding: 5px;" [attack]="cards[10].attack" [defense]="cards[10].defense" [imageUrl]="cards[0].imageUrl"
-                [health]="cards[10].defense" [name]="cards[10].name"></app-card>
-            <app-card style="padding: 5px;" [attack]="cards[1].attack" [defense]="cards[1].defense" [imageUrl]="cards[1].imageUrl"
-                [health]="cards[1].defense" [name]="cards[1].name"></app-card>
-            <app-card style="padding: 5px;" [attack]="cards[2].attack" [defense]="cards[2].defense" [imageUrl]="cards[2].imageUrl"
-                [health]="cards[2].defense" [name]="cards[2].name"></app-card>
+        <div style="border: 1px solid white; border-radius: 10px;
+     display: flex; flex-direction: row; justify-content: space-around;">
+    
+    <div style="border: 1px solid white; border-radius: 10px; display: flex; flex-direction: row; justify-content: space-around;">
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <p style="font-size: 24px; color: red;">Rabais 20%</p>
+            <p style="font-size: 18px; color: red;">Était {{ cards[2].price }}</p>
+            <p style="font-size: 18px; color: red;">Maintenant {{ cards[2].price * 0.8 }}</p>
         </div>
+        <app-cardMagasin style="padding: 5px;" [attack]="cards[2].attack" [defense]="cards[2].defense" [imageUrl]="cards[2].imageUrl"
+            [health]="cards[2].defense" [name]="cards[2].name" [price]="cards[2].price"></app-cardMagasin>
+    </div>
+    <div style="border: 1px solid white; border-radius: 10px; display: flex; flex-direction: row; justify-content: space-around;">
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <p style="font-size: 24px; color: red;">Rabais 20%</p>
+            <p style="font-size: 18px; color: red;">Était {{ cards[2].price }}</p>
+            <p style="font-size: 18px; color: red;">Maintenant {{ cards[2].price * 0.8 }}</p>
+        </div>
+        <app-cardMagasin style="padding: 5px;" [attack]="cards[2].attack" [defense]="cards[2].defense" [imageUrl]="cards[2].imageUrl"
+            [health]="cards[2].defense" [name]="cards[2].name" [price]="cards[2].price"></app-cardMagasin>
+    </div>
+    <div style="border: 1px solid white; border-radius: 10px; display: flex; flex-direction: row; justify-content: space-around;">
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <p style="font-size: 24px; color: red;">Rabais 20%</p>
+            <p style="font-size: 18px; color: red;">Était {{ cards[2].price }}</p>
+            <p style="font-size: 18px; color: red;">Maintenant {{ cards[2].price * 0.8 }}</p>
+        </div>
+        <app-cardMagasin style="padding: 5px;" [attack]="cards[2].attack" [defense]="cards[2].defense" [imageUrl]="cards[2].imageUrl"
+            [health]="cards[2].defense" [name]="cards[2].name" [price]="cards[2].price"></app-cardMagasin>
+    </div>
+</div>
 
         <h1 class="Toute-les-carte">Toute les cartes:</h1>
-        <div style="padding: 10px;  display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between;">
-            <app-card *ngFor="let card of cards" style="padding: 5px;" [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl"
-                [health]="card.defense" [name]="card.name"></app-card>
-                
+        <div style=" border: 1px solid white; border-radius: 10px; padding: 10px;  display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+            <app-cardMagasin *ngFor="let card of cards" style="padding: 5px;" [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl"
+                [health]="card.defense" [name]="card.name" [price]="card.price"></app-cardMagasin>
         </div>
 
     </div>
 
-    <div class="Rabais-en-bulk" style="padding: 10px; display: flex; flex-direction: column; width: 20%;">
+    <div class="Rabais-en-bulk" style="padding: 10px; display: flex; flex-direction: column; width: 20%; border: 1px solid white; border-radius: 10px; padding: 10px; align-items: center;">
+
         <h1>Rabais en bulk</h1>
-        <app-card style="padding: 5px;" [attack]="cards[10].attack" [defense]="cards[10].defense" [imageUrl]="cards[10].imageUrl"
-            [health]="cards[10].defense" [name]="cards[0].name"></app-card>
-        <app-card style="padding: 5px;" [attack]="cards[1].attack" [defense]="cards[1].defense" [imageUrl]="cards[1].imageUrl"
-            [health]="cards[1].defense" [name]="cards[1].name"></app-card>
-        <app-card style="padding: 5px;" [attack]="cards[2].attack" [defense]="cards[2].defense" [imageUrl]="cards[2].imageUrl"
-            [health]="cards[2].defense" [name]="cards[2].name"></app-card>
+        <app-cardMagasin style="padding: 5px;" [attack]="cards[10].attack" [defense]="cards[10].defense" [imageUrl]="cards[0].imageUrl"
+            [health]="cards[10].defense" [name]="cards[0].name"></app-cardMagasin>
+        <app-cardMagasin style="padding: 5px;" [attack]="cards[1].attack" [defense]="cards[1].defense" [imageUrl]="cards[1].imageUrl"
+            [health]="cards[1].defense" [name]="cards[1].name"></app-cardMagasin>
+        <app-cardMagasin style="padding: 5px;" [attack]="cards[2].attack" [defense]="cards[2].defense" [imageUrl]="cards[2].imageUrl"
+            [health]="cards[2].defense" [name]="cards[2].name" [price]="cards[2].price"></app-cardMagasin>
     </div>
 </div>
