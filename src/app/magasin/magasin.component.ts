@@ -16,6 +16,8 @@ export class MagasinComponent implements OnInit {
   showModal = false;
   errorMessage: string = '';
   domain: string = environment.apiUrl
+  cardsRabais: CardMagasin[] = [];
+  cardsBulk: CardMagasin[] = [];
 
   constructor(
     public http: HttpClient,
@@ -25,11 +27,19 @@ export class MagasinComponent implements OnInit {
 
   async ngOnInit() {
     await this.getcards();
+    console.log('getcards done');  
+
+    this.cardsRabais = [this.cards[1], this.cards[8], this.cards[9]];
+    console.log('cardsRabais done');  
+
+    this.cardsBulk = [this.cards[20], this.cards[18], this.cards[19]];
+    console.log('cardsBulk done'); 
+
   }
 
   // get all the cards from the server
   async getcards() {
-    console.log('getcards...');  
+    console.log('getAllcards...');  
 
     let cards = await lastValueFrom(
       this.http.get<Array<CardMagasin>>(this.domain + 'api/CardService/getallcards')
