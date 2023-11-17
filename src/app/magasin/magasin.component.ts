@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Card, CardMagasin } from '../models/Card';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
-import { MatchServiceService } from '../services/matchService.service';
+import { MagasinService } from '../services/magasin.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
 
@@ -16,44 +16,31 @@ export class MagasinComponent implements OnInit {
   showModal = false;
   errorMessage: string = '';
   domain: string = environment.apiUrl
-  cardsRabais: CardMagasin[] = [];
-  cardsBulk: CardMagasin[] = [];
+  cardsDailySelection : CardMagasin[] = [];
+  cardsWeeklySelection : CardMagasin[] = [];
+  cardOffreMoment: CardMagasin =  new CardMagasin(1,"stev",1,1,"ee",false,1,1,1,"w") ;
 
   constructor(
     public http: HttpClient,
-    public serviceMatch: MatchServiceService,
+    public serviceMagasin: MagasinService,
     public router: Router
   ) {}
 
   async ngOnInit() {
-    await this.getcards();
-    console.log('getcards done');  
+    //this.cardOffreMoment = await this.serviceMagasin.getcardsCurrentOffer();
+    this.cardsDailySelection = await this.serviceMagasin.getcardsDailySelection();
 
-    this.cardsRabais = [this.cards[1], this.cards[8], this.cards[9]];
-    console.log('cardsRabais done');  
 
-    this.cardsBulk = [this.cards[20], this.cards[18], this.cards[19]];
+
+
+    this.cardsWeeklySelection = await this.serviceMagasin.getcardsWeeklySelection();
+
     console.log('cardsBulk done'); 
 
   }
 
   // get all the cards from the server
-  async getcards() {
-    console.log('getAllcards...');  
-
-    let cards = await lastValueFrom(
-      this.http.get<CardMagasin[]>(this.domain + 'api/CardService/getallcards')
-    ).catch((error) => {
-      console.error(error);
-      throw Error(error.error?.message ?? 'Unknown error');
-    });
-
-    console.log(cards);
-
-    this.cards = cards;
-
-    console.log('getcards done');
-  }
+  
 
 
 }

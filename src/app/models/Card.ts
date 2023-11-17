@@ -22,6 +22,6 @@ export class CardMagasin {
     public rarity: number,
     public mana: number,
     public description: string,
-    public effet: Effect, 
+    public effet?: Effect, 
   ) {}
 }
