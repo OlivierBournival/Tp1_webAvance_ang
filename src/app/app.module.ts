@@ -21,6 +21,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ApiInterceptor } from './api.interceptor';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MagasinComponent } from './magasin/magasin.component';
+import { CardMagasinComponent } from './cardmagasin/cardmagasin.component';
 
 
 
@@ -33,6 +35,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatchComponent,
     HomeComponent,
     JoindrePartieModalComponent,
+    MagasinComponent,
+    CardMagasinComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +53,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatInputModule,
     ReactiveFormsModule,
     MatDialogModule,
+
+  
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },

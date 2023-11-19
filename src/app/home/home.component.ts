@@ -74,4 +74,8 @@ export class HomeComponent implements OnInit {
   closeJoindreModal() {
     this.showModal = false;
   }
+
+  Magasin() {
+    this.router.navigate(['/magasin']);
+  }
 }

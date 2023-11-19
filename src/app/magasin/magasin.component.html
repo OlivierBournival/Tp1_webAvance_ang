@@ -1,0 +1,52 @@
+<mat-toolbar class="mat-toolbar mat-toolbar-single-row">
+    <span> A Vendre kn </span>
+</mat-toolbar>
+
+<div style="display: flex; flex-direction: row; height: 100%;" *ngIf="cardsWeeklySelection.length > 0">
+    <div style="display: flex; flex-direction: column; width: 80%;  padding: 10px;">
+
+        <h1 class="Rabait-du-moment">Cartes de la semaine!</h1>
+        <div style="border: 1px solid white; border-radius: 10px;
+     display: flex; flex-direction: row; justify-content: space-around;">
+
+            <!-- Utilisation de *ngFor pour itérer sur cardsRabais -->
+<div *ngFor="let card of cardsWeeklySelection"
+style="border: 1px solid white; border-radius: 10px; display: flex; flex-direction: row; justify-content: space-around;">
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+   <!-- Utilisation de la variable card pour accéder aux propriétés spécifiques -->
+   <p style="font-size: 18px; color: red;">Nouvaux prix :  {{ card.price }}</p>
+</div>
+<app-cardMagasin style="padding: 5px;"
+                 [attack]="card.attack"
+                 [defense]="card.defense"
+                 [imageUrl]="card.imageUrl"
+                 [health]="card.defense"    
+                 [name]="card.name"
+                 [price]="card.price"></app-cardMagasin>
+</div>
+
+        </div>
+
+
+
+   
+
+    <h1 class="Toute-les-carte">Cartes journalières:</h1>
+    <div
+        style=" border: 1px solid white; border-radius: 10px; padding: 10px;  display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+        <app-cardMagasin *ngFor="let card of cardsDailySelection" style="padding: 5px;" [attack]="card.attack"
+            [defense]="card.defense" [imageUrl]="card.imageUrl" [health]="card.defense" [name]="card.name"
+            [price]="card.price"></app-cardMagasin>
+    </div>
+ </div>
+    <div class="Rabais-en-bulk"
+        style="padding: 10px; display: flex; flex-direction: column; width: 20%; border: 1px solid white; border-radius: 10px; padding: 10px; align-items: center;">
+
+        <h1>L'offre du Moment</h1>
+        <p style="font-size: 24px; color: red;"> {{ cardOffreMoment.price }} </p>
+          Utilisation de la variable card pour accéder aux propriétés spécifiques 
+        <app-cardMagasin style="padding: 5px;" [attack]="cardOffreMoment.attack" [defense]="cardOffreMoment.defense"
+            [imageUrl]="cardOffreMoment.imageUrl" [health]="cardOffreMoment.defense" [name]="cardOffreMoment.name"
+            [price]="cardOffreMoment.price"></app-cardMagasin>
+    </div>
+</div>
