@@ -1,4 +1,4 @@
-<mat-card class="supercard"
+<mat-card [class.scale-up-center]="this.scale===true" class="supercard"
   [style.background-image]="show==='back' ? 'url('+beautifulBackUrl+')' : 'url('+imageUrl+')'">
   <mat-card-header style="background-color: #0008;" *ngIf="show==='front'">
     <mat-card-title>{{name}}</mat-card-title>
@@ -14,7 +14,7 @@
       </tr>
       <tr [class.red]="health < defense! && health > 0">
         <td><i class="fas fa-shield-alt"></i></td>
-        <td > {{price}}</td><td *ngIf="health > 0">{{health}}</td>
+        <td *ngIf="health > 0">{{health}}</td>
         <td *ngIf="health == 0">{{defense}}</td>
       </tr>
     </table>
