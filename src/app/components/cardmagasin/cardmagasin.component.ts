@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Effect } from '../models/Effect';
+import { Effect } from '../../models/Effect';
 
 
 @Component({

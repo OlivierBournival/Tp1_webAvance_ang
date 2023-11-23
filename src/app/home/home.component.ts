@@ -5,6 +5,7 @@ import { lastValueFrom } from 'rxjs';
 import { MatchServiceService } from '../services/matchService.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
+import { Deck } from '../models/Deck';
 
 @Component({
   selector: 'app-home',
@@ -13,9 +14,11 @@ import { environment } from 'src/environments/environment.development';
 })
 export class HomeComponent implements OnInit {
   cards: Card[] = [];
+  decks: Deck[] = [];
   showModal = false;
   errorMessage: string = '';
-  domain: string = environment.apiUrl
+  domain: string = environment.apiUrl;
+  showCreerDeckModal = false;
 
   constructor(
     public http: HttpClient,
@@ -24,12 +27,13 @@ export class HomeComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    await this.getcards();
+    await this.getHomeCards();
+    await this.getHomeDecks();
   }
 
   // get all the cards from the server
-  async getcards() {
-    console.log('getcards...');
+  async getHomeCards() {
+    console.log('getHomeCards...');
 
     let cards = await lastValueFrom(
       this.http.get<Array<Card>>(this.domain + 'api/card/GetCardsFromPlayer')
@@ -42,7 +46,25 @@ export class HomeComponent implements OnInit {
 
     this.cards = cards;
 
-    console.log('getcards done');
+    console.log('getHomeCards done');
+  }
+
+  // get decks from the server
+  async getHomeDecks() {
+    console.log('getHomeDecks...');
+
+    let decks = await lastValueFrom(
+      this.http.get<Array<Deck>>(this.domain + 'api/deck/GetDecksFromPlayer')
+    ).catch((error) => {
+      console.error(error);
+      throw Error(error.error?.message ?? 'Unknown error');
+    });
+
+    console.log(decks);
+
+    this.decks = decks;
+
+    console.log('getHomeDecks done');
   }
 
   async openJoindreModal() {
@@ -77,5 +99,13 @@ export class HomeComponent implements OnInit {
 
   Magasin() {
     this.router.navigate(['/magasin']);
+  }
+
+  openCreerDeckModal() {
+    this.showCreerDeckModal = true;
+  }
+
+  closeCreerDeckModal() {
+    this.showCreerDeckModal = false;
   }
 }

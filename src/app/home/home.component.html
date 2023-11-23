@@ -4,9 +4,8 @@
   <span style="margin-left: 10px;"></span>
 </div>
 
-<!-- modal joindreModal -->
 
-
+<!-- Mes cartes -->
 
 <mat-toolbar class="mat-toolbar mat-toolbar-single-row">
   <span>Mes cartes</span>
@@ -16,3 +15,29 @@
   <app-card [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl" [health]="card.defense"
     [name]="card.name" *ngFor="let card of cards"></app-card>
 </div>
+
+
+<!-- Mes decks -->
+
+<mat-toolbar class="mat-toolbar mat-toolbar-single-row">
+  <span>Mes decks</span>
+</mat-toolbar>
+<div
+  style="padding: 10px; padding-top: 20px; padding-bottom: 20px; display: flex; flex-wrap: wrap; justify-content: center; row-gap: 20px; column-gap: 20px;">
+  <button mat-fab color="accent" style="margin-right: 20px;" (click)="openCreerDeckModal()">+</button>
+  <app-deck [deck]="deck" *ngFor="let deck of decks"></app-deck>
+</div>
+
+<!-- MODALS -->
+
+<!-- Modal pour joindre une partie -->
+<app-joindrePartieModal class="modal-container" *ngIf="showModal" (close)="closeJoindreModal()" (closeModal)="closeJoindreModal()"
+  [errorMessage]="errorMessage">
+</app-joindrePartieModal>
+
+<!-- Modal pour creer un deck - create-deck-modal -->
+<app-create-deck-modal class="modal-container" *ngIf="showCreerDeckModal" (close)="closeCreerDeckModal()"
+  (closeModal)="closeCreerDeckModal()">
+</app-create-deck-modal>
+
+<!-- FIN MODALS -->
