@@ -31,7 +31,16 @@ export class CardMagasinComponent implements OnInit {
 
   constructor() {}
 
+
   ngOnInit() {}
+  onMouseEnter() {
+    this.scale = true;
+  }
+
+  // Method to deactivate scale on mouse leave
+  onMouseLeave() {
+    this.scale = false;
+  }
  
 
 

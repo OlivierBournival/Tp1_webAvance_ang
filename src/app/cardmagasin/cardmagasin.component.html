@@ -1,5 +1,10 @@
-<mat-card [class.scale-up-center]="this.scale===true" class="supercard"
-  [style.background-image]="show==='back' ? 'url('+beautifulBackUrl+')' : 'url('+imageUrl+')'">
+<mat-card
+  [class.scale-up-center]="scale"
+  class="supercard"
+  [style.background-image]="show==='back' ? 'url('+beautifulBackUrl+')' : 'url('+imageUrl+')'"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
+>
   <mat-card-header style="background-color: #0008;" *ngIf="show==='front'">
     <mat-card-title>{{name}}</mat-card-title>
     <mat-card-subtitle>    <i class="fa-regular fa-money-bill"></i>    $  {{price}}</mat-card-subtitle>
@@ -18,5 +23,6 @@
         <td *ngIf="health == 0">{{defense}}</td>
       </tr>
     </table>
+    <button mat-button class="acheter-button">Acheter</button>
   </mat-card-content>
 </mat-card>
