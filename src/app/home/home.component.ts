@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Card } from '../models/Card';
 import { HttpClient } from '@angular/common/http';
-import { lastValueFrom } from 'rxjs';
 import { MatchServiceService } from '../services/matchService.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
 import { Deck } from '../models/Deck';
+import { CardsService } from '../services/cards.service';
+import { DecksService } from '../services/decks.service';
 
 @Component({
   selector: 'app-home',
@@ -23,48 +24,14 @@ export class HomeComponent implements OnInit {
   constructor(
     public http: HttpClient,
     public serviceMatch: MatchServiceService,
+    public cardsService: CardsService,
+    public decksService: DecksService,
     public router: Router
   ) {}
 
   async ngOnInit() {
-    await this.getHomeCards();
-    await this.getHomeDecks();
-  }
-
-  // get all the cards from the server
-  async getHomeCards() {
-    console.log('getHomeCards...');
-
-    let cards = await lastValueFrom(
-      this.http.get<Array<Card>>(this.domain + 'api/card/GetCardsFromPlayer')
-    ).catch((error) => {
-      console.error(error);
-      throw Error(error.error?.message ?? 'Unknown error');
-    });
-
-    console.log(cards);
-
-    this.cards = cards;
-
-    console.log('getHomeCards done');
-  }
-
-  // get decks from the server
-  async getHomeDecks() {
-    console.log('getHomeDecks...');
-
-    let decks = await lastValueFrom(
-      this.http.get<Array<Deck>>(this.domain + 'api/deck/GetDecksFromPlayer')
-    ).catch((error) => {
-      console.error(error);
-      throw Error(error.error?.message ?? 'Unknown error');
-    });
-
-    console.log(decks);
-
-    this.decks = decks;
-
-    console.log('getHomeDecks done');
+    this.cards = await this.cardsService.getCardsFromPlayer();
+    this.decks = await this.decksService.getDecksFromPlayer();
   }
 
   async openJoindreModal() {
@@ -97,15 +64,7 @@ export class HomeComponent implements OnInit {
     this.showModal = false;
   }
 
-  Magasin() {
-    this.router.navigate(['/magasin']);
-  }
-
-  openCreerDeckModal() {
-    this.showCreerDeckModal = true;
-  }
-
-  closeCreerDeckModal() {
-    this.showCreerDeckModal = false;
+  openCreateDeckPage() {
+    this.router.navigate(['/create-deck']);
   }
 }

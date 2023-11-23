@@ -24,9 +24,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MagasinComponent } from './magasin/magasin.component';
 import { CardMagasinComponent } from './components/cardmagasin/cardmagasin.component';
 import { DeckComponent } from './components/deck/deck.component';
-import { CreateDeckModalComponent } from './modals/create-deck-modal/create-deck-modal';
-
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CreateDeckPageComponent } from './pages/create-deck-page/create-deck-page.component';
 
 @NgModule({
   declarations: [
@@ -35,12 +35,12 @@ import { CreateDeckModalComponent } from './modals/create-deck-modal/create-deck
     RegisterComponent,
     CardComponent,
     DeckComponent,
-    CreateDeckModalComponent,
     MatchComponent,
     HomeComponent,
     JoindrePartieModalComponent,
     MagasinComponent,
     CardMagasinComponent,
+    CreateDeckPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,8 +57,8 @@ import { CreateDeckModalComponent } from './modals/create-deck-modal/create-deck
     MatInputModule,
     ReactiveFormsModule,
     MatDialogModule,
-
-  
+    MatCheckboxModule,
+    MatFormFieldModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },

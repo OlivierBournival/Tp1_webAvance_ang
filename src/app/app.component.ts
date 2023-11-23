@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  Magasin() {
+  openMagasinPage() {
     this.router.navigate(['/magasin']);
   }
 }
