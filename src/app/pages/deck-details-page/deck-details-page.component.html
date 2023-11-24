@@ -1,0 +1,26 @@
+<!-- deck-details-page.component.html -->
+
+<mat-card class="supercard">
+    <mat-card-header style="background-color: #0008;">
+      <mat-card-title>{{deck?.nom}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngFor="let card of deck?.cards">
+        <!-- Display card details as needed -->
+        <app-card [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl" [health]="card.defense"
+          [name]="card.name"></app-card>
+  
+        <!-- Button to remove the card -->
+        <button mat-raised-button color="warn" (click)="removeCardFromDeck(deckId!, card.id)">
+          Remove Card
+        </button>
+      </div>
+    </mat-card-content>
+  
+    <!-- Button to go back to the main page -->
+    <button mat-raised-button (click)="goBack()">Go Back</button>
+  
+    <!-- Button to add a card to the deck -->
+    <!-- <button mat-raised-button (click)="addCardToDeck(deckId!, )">Add Card</button> -->
+  </mat-card>
+  

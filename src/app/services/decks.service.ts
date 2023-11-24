@@ -35,11 +35,6 @@ export class DecksService {
   createDeck(deck: any): Observable<any> {
     return this.http.post(`${this.domain}api/deck/CreateDeck`, deck);
   }
-  
-  addCardToDeck(IdDeck: number, IdCard: number): Observable<any> {
-    const data = { IdDeck, IdCard };
-    return this.http.post(this.domain + 'api/deck/AddCardDeck', data);
-  }
 
   removeCardFromDeck(IdDeck: number, IdCard: number): Observable<any> {
     const data = { IdDeck, IdCard };
@@ -49,4 +44,16 @@ export class DecksService {
   deleteDeck(IdDeck: number): Observable<any> {
     return this.http.post(this.domain + 'api/deck/DeleteDeck', { IdDeck });
   }
+
+  getDeckDetails(deckId: number): Promise<Deck> {
+    return lastValueFrom(
+      this.http.get<Deck>(`${this.domain}api/deck/GetDeckDetails/${deckId}`)
+    );
+  }
+
+  addCardToDeck(deckId: number, cardId: number): Observable<any> {
+    const data = { IdDeck: deckId, IdCard: cardId };
+    return this.http.post(this.domain + 'api/deck/AddCardDeck', data);
+  }
+
 }

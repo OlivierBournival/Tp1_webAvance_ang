@@ -5,5 +5,11 @@
   <mat-card-content
     style="display: flex; justify-content: flex-end; flex-direction: column; align-content: center; height: 100%"
     *ngIf="show==='front'">
+    
+    <!-- Check if the deck has cards and display the first card image -->
+    <img *ngIf="deck && deck.cards && deck.cards.length > 0" [src]="deck.cards[0]!.imageUrl" alt="Deck Image" />
+    
+    <!-- Fallback image if the deck has no cards -->
+    <img *ngIf="!deck || !deck.cards || deck.cards.length === 0" [src]="beautifulBackUrl" alt="Deck Image" />
   </mat-card-content>
 </mat-card>

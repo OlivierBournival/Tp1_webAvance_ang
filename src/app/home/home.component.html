@@ -25,7 +25,10 @@
 <div
   style="padding: 10px; padding-top: 20px; padding-bottom: 20px; display: flex; flex-wrap: wrap; justify-content: center; row-gap: 20px; column-gap: 20px;">
   <button mat-fab color="accent" style="margin-right: 20px;" (click)="openCreateDeckPage()">+</button>
-  <app-deck [deck]="deck" *ngFor="let deck of decks"></app-deck>
+  <!-- Use an anchor tag to make the deck clickable and navigate to deck details page -->
+  <a *ngFor="let deck of decks" [routerLink]="['/deck-details', deck.deckId]">
+    <app-deck [deck]="deck"></app-deck>
+  </a>
 </div>
 
 <!-- MODALS -->
