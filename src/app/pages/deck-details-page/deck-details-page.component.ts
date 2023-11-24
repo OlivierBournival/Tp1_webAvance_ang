@@ -33,10 +33,14 @@ export class DeckDetailsComponent implements OnInit {
   async removeCardFromDeck(cardId: number) {
     console.log('Removing cardId ' + cardId +  ' from deck:', this.deckId);
     
-    
-    this.decksService.removeCardFromDeck(this.deckId!, cardId);
-    this.deck = await this.decksService.getDeckDetails(this.deckId!); // Refresh deck details
+    try {
+      await this.decksService.removeCardFromDeck(this.deckId!, cardId);
+      this.deck = await this.decksService.getDeckDetails(this.deckId!); // Refresh deck details
+    } catch (error) {
+      console.error(error);
+    }
   }
+  
 
   goBack() {
     this.router.navigate(['/']); // Navigate back to the main page

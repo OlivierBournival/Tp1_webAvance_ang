@@ -38,27 +38,20 @@ export class DecksService {
     return this.http.post(`${this.domain}api/deck/CreateDeck`, deck);
   }
 
-  removeCardFromDeck(IdDeck: number, IdCard: number) {
+  async removeCardFromDeck(IdDeck: number, IdCard: number): Promise<any> {
     const removeCardFromDeckDTO: RemoveCardFromDeckDTO = {
       IdDeck,
       IdCard,
     };
-
-    console.log(removeCardFromDeckDTO);
-
-    try {
-      const response: any = lastValueFrom(
-        this.http.post(
-          this.domain + 'api/deck/RemoveCardDeck',
-          removeCardFromDeckDTO
-        )
-      );
-
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
+  
+    return lastValueFrom(
+      this.http.post(
+        this.domain + 'api/deck/RemoveCardDeck',
+        removeCardFromDeckDTO
+      )
+    );
   }
+  
 
   deleteDeck(IdDeck: number): Observable<any> {
     return this.http.post(this.domain + 'api/deck/DeleteDeck', { IdDeck });
