@@ -6,12 +6,12 @@
   <mat-card-content
     style="display: flex; justify-content: flex-end; flex-direction: column; align-content: center; height: 100%"
     *ngIf="show==='front'">
-    <table style="font-size: 2em; font-size: 2em; width: fit-content;">
-      <tr>
+    <table style="font-size: 2em; font-size: 2em; width: fit-content;" class="bg-gray-700 bg-opacity-50 rounded-md p-4">
+      <tr class="m-2">
         <td><i class="fas fa-fist-raised"></i></td>
         <td>{{attack}}</td>
       </tr>
-      <tr [class.red]="health < defense! && health>0">
+      <tr [class.red]="health < defense! && health>0" class="m-2">
         <td><i class="fas fa-shield-alt"></i></td>
         <td *ngIf="health>0">{{health}}</td>
         <td *ngIf="health==0">{{defense}}</td>
