@@ -1,8 +1,13 @@
-<mat-card class="supercard"
-  [style.background-image]="show==='back' ? 'url('+beautifulBackUrl+')' : 'url('+imageUrl+')'">
+<mat-card
+  [class.scale-up-center]="scale"
+  class="supercard"
+  [style.background-image]="show==='back' ? 'url('+beautifulBackUrl+')' : 'url('+imageUrl+')'"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
+>
   <mat-card-header style="background-color: #0008;" *ngIf="show==='front'">
     <mat-card-title>{{name}}</mat-card-title>
-    <mat-card-subtitle>    <i class="fa-regular fa-money-bill"></i>    $  {{price}}</mat-card-subtitle>
+    <mat-card-subtitle>    💰 {{price}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content
     style="display: flex; justify-content: flex-end; flex-direction: column; align-content: center; height: 100%"
@@ -14,9 +19,10 @@
       </tr>
       <tr [class.red]="health < defense! && health > 0">
         <td><i class="fas fa-shield-alt"></i></td>
-        <td > {{price}}</td><td *ngIf="health > 0">{{health}}</td>
+        <td *ngIf="health > 0">{{health}}</td>
         <td *ngIf="health == 0">{{defense}}</td>
       </tr>
     </table>
+    <button mat-button class="acheter-button">Acheter</button>
   </mat-card-content>
 </mat-card>

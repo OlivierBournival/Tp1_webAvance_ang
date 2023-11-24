@@ -55,6 +55,9 @@ export class HomeComponent implements OnInit {
       await this.delay(1000);
     }
   }
+  async SellCard(id: number) {//self explanatory
+    return null;
+  }
 
   async delay(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
