@@ -1,8 +1,9 @@
 // add-card-modal.component.ts
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DecksService } from 'src/app/services/decks.service';
 import { Card } from 'src/app/models/Card';
+import { AddCardsDTO } from 'src/app/DTO/AddCardsDTO';
 
 @Component({
   selector: 'app-add-card-modal',
@@ -14,7 +15,8 @@ export class AddCardModalComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<AddCardModalComponent>,
-    private decksService: DecksService
+    private decksService: DecksService,
+    @Inject(MAT_DIALOG_DATA) public data: { deckId: number } // Inject deckId
   ) {}
 
   ngOnInit() {
@@ -22,7 +24,7 @@ export class AddCardModalComponent implements OnInit {
   }
 
   async loadAvailableCards() {
-    const deckId = 1; // Replace with the actual deckId
+    const deckId = this.data.deckId; // Use the passed deckId
     this.availableCards = await this.decksService.getCardsNotInDeck(deckId);
   }
 
@@ -40,21 +42,23 @@ export class AddCardModalComponent implements OnInit {
   }
 
   addCard() {
-    // Implement logic to add the selected cards to the deck
-    const deckId = 1; // Replace with the actual deckId
+    console.log('Adding cards:', this.selectedCardIds);
 
-    for (const selectedCardId of this.selectedCardIds) {
-      this.decksService.addCardToDeck(deckId, selectedCardId).subscribe(
-        () => {
-          console.log('Card added successfully');
-          // Optionally, you may want to perform additional actions after adding each card
-        },
-        (error) => {
-          console.error('Error adding card', error);
-          // Handle error if needed
-        }
-      );
-    }
+    const addCardsDTO: AddCardsDTO = {
+      IdDeck: this.data.deckId,
+      IdCards: this.selectedCardIds,
+    };
+
+    this.decksService.addCardsToDeck(addCardsDTO).subscribe(
+      (response) => {
+        console.log('Card added successfully', response);
+        // Optionally, you may want to perform additional actions after adding each card
+      },
+      (error) => {
+        console.error('Error adding card', error);
+        // Handle error if needed
+      }
+    );
 
     this.close();
   }

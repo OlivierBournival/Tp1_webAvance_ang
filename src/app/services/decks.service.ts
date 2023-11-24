@@ -5,6 +5,7 @@ import { lastValueFrom } from 'rxjs';
 import { Deck } from '../models/Deck';
 import { Observable } from 'rxjs';
 import { Card } from '../models/Card';
+import { AddCardsDTO } from '../DTO/AddCardsDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -52,20 +53,13 @@ export class DecksService {
     );
   }
 
-  addCardToDeck(deckId: number, cardId: number): Observable<any> {
-    const data = { IdDeck: deckId, IdCard: cardId };
-    return this.http.post(this.domain + 'api/deck/AddCardDeck', data);
-  }
-
   getCardsNotInDeck(deckId: number): Promise<any> {
     return lastValueFrom(
       this.http.get<any>(`${this.domain}api/deck/GetCardsNotInDeck/${deckId}`)
     );
   }
 
-  // decks.service.ts
-  addCardsToDeck(deckId: number, cardIds: number[]): Observable<any> {
-    const data = { IdDeck: deckId, IdCards: cardIds };
-    return this.http.post(this.domain + 'api/deck/AddCardsToDeck', data);
+  addCardsToDeck(addCardsDTO: AddCardsDTO): Observable<any> {
+    return this.http.post(`${this.domain}api/deck/AddCardsToDeck`, addCardsDTO);
   }
 }

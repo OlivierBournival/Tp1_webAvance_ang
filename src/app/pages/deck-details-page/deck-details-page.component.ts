@@ -10,7 +10,6 @@ import { DecksService } from 'src/app/services/decks.service';
 @Component({
   selector: 'app-deck-details',
   templateUrl: './deck-details-page.component.html',
-  styleUrls: ['./deck-details-page.component.css'],
 })
 export class DeckDetailsComponent implements OnInit {
   deckId?: number;
@@ -31,11 +30,6 @@ export class DeckDetailsComponent implements OnInit {
     });
   }
 
-  async addCardToDeck(deckId: number, cardId: number) {
-    await this.decksService.addCardToDeck(deckId, cardId);
-    this.deck = await this.decksService.getDeckDetails(deckId); // Refresh deck details
-  }
-
   async removeCardFromDeck(deckId: number, cardId: number) {
     await this.decksService.removeCardFromDeck(deckId, cardId);
     this.deck = await this.decksService.getDeckDetails(deckId); // Refresh deck details
@@ -46,13 +40,16 @@ export class DeckDetailsComponent implements OnInit {
   }
 
   addCard() {
-    // Open the add card modal
-    const dialogRef = this.dialog.open(AddCardModalComponent);
-  
+    // Open the add card modal and pass the deckId
+    const dialogRef = this.dialog.open(AddCardModalComponent, {
+      data: { deckId: this.deckId }, // Pass deckId as data
+    });
+
     // Subscribe to the afterClosed event to handle modal closure
     dialogRef.afterClosed().subscribe((result) => {
       // Handle the result if needed
       console.log('The dialog was closed', result);
+      this.ngOnInit();
     });
   }
 }
