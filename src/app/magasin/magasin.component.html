@@ -25,7 +25,10 @@ style="border: 1px solid white; border-radius: 10px; display: flex; flex-directi
                  [imageUrl]="card.imageUrl"
                  [health]="card.defense"    
                  [name]="card.name"
-                 [price]="card.price"></app-cardMagasin>
+                 [price]="card.price"
+                 [effet]="card.effet!"
+                 
+                 ></app-cardMagasin>
 </div>
 
         </div>
@@ -39,7 +42,7 @@ style="border: 1px solid white; border-radius: 10px; display: flex; flex-directi
         style=" border: 1px solid white; border-radius: 10px; padding: 10px;  display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: center;">
         <app-cardMagasin *ngFor="let card of cardsDailySelection" style="padding: 5px;" [attack]="card.attack"
             [defense]="card.defense" [imageUrl]="card.imageUrl" [health]="card.defense" [name]="card.name"
-            [price]="card.price"></app-cardMagasin>
+            [price]="card.price" [effet]="card.effet!"  ></app-cardMagasin>
     </div>
     
  </div>
@@ -51,6 +54,6 @@ style="border: 1px solid white; border-radius: 10px; display: flex; flex-directi
           Utilisation de la variable card pour accéder aux propriétés spécifiques 
         <app-cardMagasin style="padding: 5px;" [attack]="cardOffreMoment.attack" [defense]="cardOffreMoment.defense"
             [imageUrl]="cardOffreMoment.imageUrl" [health]="cardOffreMoment.defense" [name]="cardOffreMoment.name"
-            [price]="cardOffreMoment.price"></app-cardMagasin>
+            [price]="cardOffreMoment.price" [effet]="cardOffreMoment.effet!" ></app-cardMagasin>
     </div>
 </div>

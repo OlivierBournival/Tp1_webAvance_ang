@@ -33,6 +33,8 @@ export class CardMagasinComponent implements OnInit {
 
 
   ngOnInit() {}
+  
+
   onMouseEnter() {
     this.scale = true;
   }

@@ -10,6 +10,19 @@
   right: 0;
   margin: 8px;
 }
+.effect-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ccc;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.effect-icon img {
+  width: 20px; /* Adjust the size as needed */
+  height: 20px; /* Adjust the size as needed */
+}
 
 .red {
   color: red;
