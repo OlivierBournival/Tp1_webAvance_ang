@@ -4,8 +4,8 @@ import { environment } from 'src/environments/environment.development';
 import { lastValueFrom } from 'rxjs';
 import { Deck } from '../models/Deck';
 import { Observable } from 'rxjs';
-import { Card } from '../models/Card';
 import { AddCardsDTO } from '../DTO/AddCardsDTO';
+import { RemoveCardFromDeckDTO } from '../DTO/RemoveCardFromDeckDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -38,9 +38,26 @@ export class DecksService {
     return this.http.post(`${this.domain}api/deck/CreateDeck`, deck);
   }
 
-  removeCardFromDeck(IdDeck: number, IdCard: number): Observable<any> {
-    const data = { IdDeck, IdCard };
-    return this.http.post(this.domain + 'api/deck/RemoveCardDeck', data);
+  removeCardFromDeck(IdDeck: number, IdCard: number) {
+    const removeCardFromDeckDTO: RemoveCardFromDeckDTO = {
+      IdDeck,
+      IdCard,
+    };
+
+    console.log(removeCardFromDeckDTO);
+
+    try {
+      const response: any = lastValueFrom(
+        this.http.post(
+          this.domain + 'api/deck/RemoveCardDeck',
+          removeCardFromDeckDTO
+        )
+      );
+
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   deleteDeck(IdDeck: number): Observable<any> {
