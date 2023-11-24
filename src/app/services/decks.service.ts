@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment.development';
 import { lastValueFrom } from 'rxjs';
 import { Deck } from '../models/Deck';
 import { Observable } from 'rxjs';
+import { Card } from '../models/Card';
 
 @Injectable({
   providedIn: 'root',
@@ -56,4 +57,15 @@ export class DecksService {
     return this.http.post(this.domain + 'api/deck/AddCardDeck', data);
   }
 
+  getCardsNotInDeck(deckId: number): Promise<any> {
+    return lastValueFrom(
+      this.http.get<any>(`${this.domain}api/deck/GetCardsNotInDeck/${deckId}`)
+    );
+  }
+
+  // decks.service.ts
+  addCardsToDeck(deckId: number, cardIds: number[]): Observable<any> {
+    const data = { IdDeck: deckId, IdCards: cardIds };
+    return this.http.post(this.domain + 'api/deck/AddCardsToDeck', data);
+  }
 }

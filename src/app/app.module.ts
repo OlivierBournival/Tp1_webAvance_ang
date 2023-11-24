@@ -28,6 +28,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CreateDeckPageComponent } from './pages/create-deck-page/create-deck-page.component';
 import { DeckDetailsComponent } from './pages/deck-details-page/deck-details-page.component';
+import { AddCardModalComponent } from './modals/add-card-modal/add-card-modal.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { DeckDetailsComponent } from './pages/deck-details-page/deck-details-pag
     CardMagasinComponent,
     CreateDeckPageComponent,
     DeckDetailsComponent,
+    AddCardModalComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,26 +1,23 @@
-<!-- deck-details-page.component.html -->
+<div class="p-8">
+  <form>
+    <h2 class="text-3xl font-bold mb-6">Deck ...</h2>
 
-<mat-card class="supercard">
-    <mat-card-header style="background-color: #0008;">
-      <mat-card-title>{{deck?.nom}}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div *ngFor="let card of deck?.cards">
-        <!-- Display card details as needed -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      <div *ngFor="let card of deck?.cards" class="flex items-center mb-4">
         <app-card [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl" [health]="card.defense"
-          [name]="card.name"></app-card>
-  
-        <!-- Button to remove the card -->
+          [name]="card.name" class="flex-shrink-0"></app-card>
         <button mat-raised-button color="warn" (click)="removeCardFromDeck(deckId!, card.id)">
           Remove Card
         </button>
       </div>
-    </mat-card-content>
-  
-    <!-- Button to go back to the main page -->
-    <button mat-raised-button (click)="goBack()">Go Back</button>
-  
-    <!-- Button to add a card to the deck -->
-    <!-- <button mat-raised-button (click)="addCardToDeck(deckId!, )">Add Card</button> -->
-  </mat-card>
-  
+    </div>
+
+    <div *ngIf="errorMessage" class="text-red-500 mt-4">{{ errorMessage }}</div> <!-- Display the error message -->
+  </form>
+  <div class="p-4 flex justify-end space-x-2">
+    <button class="px-4 py-2 bg-gray-500 text-white hover:bg-gray-600 rounded-full text-lg font-bold"
+      (click)="goBack()">Retour</button>
+    <button class="px-4 py-2 bg-blue-500 text-white hover:bg-blue-600 rounded-full text-lg font-bold"
+      (click)="addCard()">Ajouter une carte</button>
+  </div>
+</div>
