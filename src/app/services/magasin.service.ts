@@ -56,6 +56,18 @@ export class MagasinService {
 
     return cards;
   }
+  async getAllcards(): Promise<CardMagasin[]> {
+    let cards = await lastValueFrom(
+      this.http.get<CardMagasin[]>(this.domain + 'api/CardService/getallcards')
+    ).catch((error) => {
+      console.error(error);
+      throw Error(error.error?.message ?? 'Unknown error');
+    });
+
+    console.log(cards);
+
+    return cards;
+  }
   async getcardsCurrentOffer(): Promise<CardMagasin> {
     let card = await lastValueFrom(
       this.http.get<CardMagasin>(this.domain + 'api/Magasin/CurrentOffer')
