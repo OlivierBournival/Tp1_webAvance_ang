@@ -70,4 +70,14 @@ export class CreateDeckPageComponent implements OnInit {
       this.errorMessage = 'Invalid form or no cards selected.'; // Set the error message
     }
   }
+
+  toggleSelectAll() {
+    if (this.selectedCardIds.length === this.cards.length) {
+      // If all cards are selected, clear the selection
+      this.selectedCardIds = [];
+    } else {
+      // Otherwise, select all cards
+      this.selectedCardIds = this.cards.map(card => card.id);
+    }
+  }
 }

@@ -3,12 +3,14 @@
     <h2 class="text-3xl font-bold mb-6">Deck {{ deck?.nom }}</h2>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-      <div *ngFor="let card of deck?.cards" class="flex items-center mb-4">
-        <app-card [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl" [health]="card.defense"
-          [name]="card.name" class="flex-shrink-0"></app-card>
-        <button mat-raised-button color="warn" (click)="removeCardFromDeck(card.id)">
-          Remove Card
-        </button>
+      <div *ngFor="let card of deck?.cards" class="mb-4">
+        <div class="flex flex-col items-center">
+          <app-card [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl" [health]="card.defense"
+            [name]="card.name" class="flex-shrink-0"></app-card>
+          <button mat-raised-button color="warn" (click)="removeCardFromDeck(card.id)">
+            Supprimer 🗑️
+          </button>
+        </div>
       </div>
     </div>
 
