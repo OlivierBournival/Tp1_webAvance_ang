@@ -1,0 +1,36 @@
+<div class="p-8">
+  <form [formGroup]="deckForm">
+    <p class="text-3xl font-bold mb-6">Créer un nouveau Deck</p>
+    <mat-form-field class="mb-6 w-full">
+      <input matInput placeholder="Nom du Deck" formControlName="deckName"
+        class="w-full p-3 border border-gray-400 rounded-md">
+    </mat-form-field>
+
+
+    <p class="text-2xl font-bold mb-6">Cartes du Deck :</p>
+
+    <div class="flex items-center mb-6">
+      <mat-checkbox (change)="toggleSelectAll()" class="mr-2"></mat-checkbox>
+      <span class="text-lg font-bold">Tout sélectionner</span>
+    </div>
+
+    <div *ngIf="cards && cards.length > 0"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      <div *ngFor="let card of cards" class="flex flex-col items-center mb-4">
+        <mat-checkbox [checked]="selectedCardIds.includes(card.id)" (change)="toggleCardSelection(card.id)"
+          class="mr-2">
+        </mat-checkbox>
+        <app-card [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl" [health]="card.defense"
+          [name]="card.name" class="flex-shrink-0"></app-card>
+      </div>
+    </div>
+
+    <div *ngIf="errorMessage" class="text-red-500 mt-4">{{ errorMessage }}</div> <!-- Display the error message -->
+  </form>
+  <div class="p-4 flex justify-end space-x-2">
+    <button class="px-4 py-2 bg-gray-500 text-white hover:bg-gray-600 rounded-full text-lg font-bold"
+      (click)="goBack()">Retour</button>
+    <button class="px-4 py-2 bg-blue-500 text-white hover:bg-blue-600 rounded-full text-lg font-bold"
+      (click)="createDeck()">Créer</button>
+  </div>
+</div>

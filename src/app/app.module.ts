@@ -6,7 +6,7 @@ import { LoginComponent } from './authentification/login/login.component';
 import { RegisterComponent } from './authentification/register/register.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
-import { CardComponent } from './card/card.component';
+import { CardComponent } from './components/card/card.component';
 import { MatchComponent } from './match/match.component';
 import { HomeComponent } from './home/home.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -22,9 +22,13 @@ import { ApiInterceptor } from './api.interceptor';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MagasinComponent } from './magasin/magasin.component';
-import { CardMagasinComponent } from './cardmagasin/cardmagasin.component';
-
-
+import { CardMagasinComponent } from './components/cardmagasin/cardmagasin.component';
+import { DeckComponent } from './components/deck/deck.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CreateDeckPageComponent } from './pages/create-deck-page/create-deck-page.component';
+import { DeckDetailsComponent } from './pages/deck-details-page/deck-details-page.component';
+import { AddCardModalComponent } from './modals/add-card-modal/add-card-modal.component';
 
 @NgModule({
   declarations: [
@@ -32,11 +36,15 @@ import { CardMagasinComponent } from './cardmagasin/cardmagasin.component';
     LoginComponent,
     RegisterComponent,
     CardComponent,
+    DeckComponent,
     MatchComponent,
     HomeComponent,
     JoindrePartieModalComponent,
     MagasinComponent,
     CardMagasinComponent,
+    CreateDeckPageComponent,
+    DeckDetailsComponent,
+    AddCardModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,8 +61,8 @@ import { CardMagasinComponent } from './cardmagasin/cardmagasin.component';
     MatInputModule,
     ReactiveFormsModule,
     MatDialogModule,
-
-  
+    MatCheckboxModule,
+    MatFormFieldModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Card } from '../models/Card';
 import { HttpClient } from '@angular/common/http';
-import { lastValueFrom } from 'rxjs';
 import { MatchServiceService } from '../services/matchService.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
-import { MagasinService } from '../services/magasin.service';
+import { Deck } from '../models/Deck';
+import { CardsService } from '../services/cards.service';
+import { DecksService } from '../services/decks.service';
 
 @Component({
   selector: 'app-home',
@@ -14,46 +15,24 @@ import { MagasinService } from '../services/magasin.service';
 })
 export class HomeComponent implements OnInit {
   cards: Card[] = [];
+  decks: Deck[] = [];
   showModal = false;
   errorMessage: string = '';
-  domain: string = environment.apiUrl
+  domain: string = environment.apiUrl;
+  showCreerDeckModal = false;
 
   constructor(
     public http: HttpClient,
     public serviceMatch: MatchServiceService,
-    public serviceMagasin: MagasinService,
+    public cardsService: CardsService,
+    public decksService: DecksService,
     public router: Router
   ) {}
 
   async ngOnInit() {
-    await this.getcards();
+    this.cards = await this.cardsService.getCardsFromPlayer();
+    this.decks = await this.decksService.getDecksFromPlayer();
   }
-/* to test
-  // get all the cards from the server
-  async getcards() {
-   
-
-    this.cards = await this.serviceMagasin.getAllcards();
-
-    console.log('getcards done');
-  }*/
-   
-  async getcards() {
-    console.log('getcards...');
-
-    let cards = await lastValueFrom(
-      this.http.get<Array<Card>>(this.domain + 'api/card/GetCardsFromPlayer')//
-    ).catch((error) => {
-      console.error(error);
-      throw Error(error.error?.message ?? 'Unknown error');
-    });
-
-    console.log(cards);
-
-    this.cards = cards;
-
-    console.log('getcards done');
-  } 
 
   async openJoindreModal() {
     this.showModal = true;
@@ -88,7 +67,7 @@ export class HomeComponent implements OnInit {
     this.showModal = false;
   }
 
-  Magasin() {
-    this.router.navigate(['/magasin']);
+  openCreateDeckPage() {
+    this.router.navigate(['/create-deck']);
   }
 }

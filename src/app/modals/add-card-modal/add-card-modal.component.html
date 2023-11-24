@@ -1,0 +1,14 @@
+<!-- add-card-modal.component.html -->
+<h2 mat-dialog-title>Ajouter une carte au deck</h2>
+<div mat-dialog-content>
+  <div *ngFor="let card of availableCards" class="flex items-center mb-4">
+    <mat-checkbox [checked]="selectedCardIds.includes(card.id)" (change)="toggleCardSelection(card.id)"
+      class="mr-2"></mat-checkbox>
+    <app-card [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl" [health]="card.defense"
+      [name]="card.name" class="flex-shrink-0"></app-card>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Annuler</button>
+  <button mat-button (click)="addCard()">Ajouter</button>
+</div>

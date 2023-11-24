@@ -4,9 +4,8 @@
   <span style="margin-left: 10px;"></span>
 </div>
 
-<!-- modal joindreModal -->
 
-
+<!-- Mes cartes -->
 
 <mat-toolbar class="mat-toolbar mat-toolbar-single-row">
   <span>Mes cartes</span>
@@ -21,3 +20,27 @@
     </button>
   </div>
 </div>
+
+
+<!-- Mes decks -->
+
+<mat-toolbar class="mat-toolbar mat-toolbar-single-row">
+  <span>Mes decks</span>
+</mat-toolbar>
+<div
+  style="padding: 10px; padding-top: 20px; padding-bottom: 20px; display: flex; flex-wrap: wrap; justify-content: center; row-gap: 20px; column-gap: 20px;">
+  <button mat-fab color="accent" style="margin-right: 20px;" (click)="openCreateDeckPage()">+</button>
+  <!-- Use an anchor tag to make the deck clickable and navigate to deck details page -->
+  <a *ngFor="let deck of decks" [routerLink]="['/deck-details', deck.deckId]">
+    <app-deck [deck]="deck"></app-deck>
+  </a>
+</div>
+
+<!-- MODALS -->
+
+<!-- Modal pour joindre une partie -->
+<app-joindrePartieModal class="modal-container" *ngIf="showModal" (close)="closeJoindreModal()"
+  (closeModal)="closeJoindreModal()" [errorMessage]="errorMessage">
+</app-joindrePartieModal>
+
+<!-- FIN MODALS -->
