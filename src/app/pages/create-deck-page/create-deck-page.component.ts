@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Card } from 'src/app/models/Card';
 import { CardsService } from 'src/app/services/cards.service';
+import { DecksService } from 'src/app/services/decks.service';
 import { environment } from 'src/environments/environment.development';
 
 @Component({
@@ -20,6 +21,7 @@ export class CreateDeckPageComponent implements OnInit {
   constructor(
     public http: HttpClient,
     public cardsService: CardsService,
+    public decksService: DecksService,
     public router: Router,
     private formBuilder: FormBuilder
   ) {
@@ -46,9 +48,26 @@ export class CreateDeckPageComponent implements OnInit {
   }
 
   createDeck() {
-    // Implement the logic to create the deck with selectedCardIds and deckName
-    console.log('Selected Card IDs:', this.selectedCardIds);
-    console.log('Deck Name:', this.deckForm.value.deckName);
-    // Add your HTTP request or other logic here
+    if (this.deckForm.valid && this.selectedCardIds.length > 0) {
+      const deck = {
+        deckName: this.deckForm.value.deckName,
+        cardIds: this.selectedCardIds
+      };
+  
+      this.decksService.createDeck(deck).subscribe(
+        () => {
+          console.log('Deck created successfully');
+          // Redirect or perform any other actions after successful deck creation
+          this.router.navigate(['/']);
+        },
+        (error) => {
+          console.error('Error creating deck:', error);
+          this.errorMessage = 'Error creating deck. Please try again.'; // Set the error message
+        }
+      );
+    } else {
+      console.warn('Invalid form or no cards selected');
+      this.errorMessage = 'Invalid form or no cards selected.'; // Set the error message
+    }
   }
 }

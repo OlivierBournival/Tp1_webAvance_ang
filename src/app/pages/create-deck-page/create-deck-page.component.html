@@ -15,6 +15,8 @@
           [name]="card.name" class="flex-shrink-0"></app-card>
       </div>
     </div>
+
+    <div *ngIf="errorMessage" class="text-red-500 mt-4">{{ errorMessage }}</div> <!-- Display the error message -->
   </form>
   <div class="p-4 flex justify-end space-x-2">
     <button class="px-4 py-2 bg-gray-500 text-white hover:bg-gray-600 rounded-full text-lg font-bold" (click)="goBack()">Retour</button>

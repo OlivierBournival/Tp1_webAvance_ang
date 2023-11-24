@@ -32,10 +32,10 @@ export class DecksService {
     return [];
   }
 
-  createDeck(deck: Deck): Observable<any> {
-    return this.http.post(this.domain + 'api/deck/CreateDeck', deck);
+  createDeck(deck: any): Observable<any> {
+    return this.http.post(`${this.domain}api/deck/CreateDeck`, deck);
   }
-
+  
   addCardToDeck(IdDeck: number, IdCard: number): Observable<any> {
     const data = { IdDeck, IdCard };
     return this.http.post(this.domain + 'api/deck/AddCardDeck', data);
