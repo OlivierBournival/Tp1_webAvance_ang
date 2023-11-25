@@ -4,11 +4,11 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
       <div *ngFor="let card of deck?.cards" class="mb-4">
-        <div class="flex flex-col items-center">
+        <div class="flex flex-col items-center relative">
           <app-card [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl" [health]="card.defense"
             [name]="card.name" class="flex-shrink-0"></app-card>
-          <button mat-raised-button color="warn" (click)="removeCardFromDeck(card.id)">
-            Supprimer 🗑️
+          <button (click)="removeCardFromDeck(card.id)" class="absolute bottom-5 left-1/2 transform -translate-x-1/2 bg-red-500 text-white border-none p-2 rounded cursor-pointer">
+            <span class="text-xl">🗑️</span>
           </button>
         </div>
       </div>
