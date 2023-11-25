@@ -79,4 +79,8 @@ export class HomeComponent implements OnInit {
   openCreateDeckPage() {
     this.router.navigate(['/create-deck']);
   }
+
+  openMagasinPage() {
+    this.router.navigate(['/magasin']);
+  }
 }
