@@ -1,10 +1,31 @@
 .supercard {
   width: 250px;
   height: 300px;
-  background-size: cover;
-  background-position: center;
+  margin: 10px;
+  /* Add margin for space around the card */
 }
 
-.red {
-  color: red;
+.supercard-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.inner-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+  margin: 10px;
+  /* Add margin for space around the card */
+}
+
+.inner-content {
+  flex: 1;
+}
+
+.selected {
+  border: 2px solid #3498db;
 }

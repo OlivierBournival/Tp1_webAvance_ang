@@ -1,15 +1,29 @@
-<mat-card class="supercard">
+<mat-card class="supercard" [class.selected]="selected">
   <mat-card-header style="background-color: #0008;" *ngIf="show==='front'">
     <mat-card-title>{{deck?.nom}}</mat-card-title>
   </mat-card-header>
-  <mat-card-content
-    style="display: flex; justify-content: flex-end; flex-direction: column; align-content: center; height: 100%"
-    *ngIf="show==='front'">
-    
-    <!-- Check if the deck has cards and display the first card image -->
-    <img *ngIf="deck && deck.cards && deck.cards.length > 0" [src]="deck.cards[0]!.imageUrl" alt="Deck Image" />
-    
-    <!-- Fallback image if the deck has no cards -->
-    <img *ngIf="!deck || !deck.cards || deck.cards.length === 0" [src]="beautifulBackUrl" alt="Deck Image" />
-  </mat-card-content>
+  <div *ngIf="deck && deck.cards && deck.cards.length > 0" class="supercard-content">
+    <mat-card class="inner-card" style="background-image: url({{deck.cards[0]!.imageUrl}});">
+      <mat-card-header style="background-color: #0008" class="rounded-t-sm">
+        <mat-card-title>{{deck.cards[0]!.name}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="inner-content mt-4">
+        <table style="font-size: 2em; width: fit-content;" class="bg-gray-700 bg-opacity-50 rounded-md p-4">
+          <tr class="m-2">
+            <td><i class="fas fa-fist-raised"></i></td>
+            <td>{{deck.cards[0]!.attack}}</td>
+          </tr>
+          <tr class="m-2">
+            <td><i class="fas fa-shield-alt"></i></td>
+            <td>{{deck.cards[0]!.defense}}</td>
+          </tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+    <button [routerLink]="['/deck-details', deck.deckId]" class="bg-blue-500 p-1 mx-2 mb-2 rounded-lg">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+  <!-- Fallback image if the deck has no cards -->
+  <img *ngIf="!deck || !deck.cards || deck.cards.length === 0" [src]="beautifulBackUrl" alt="Deck Image" />
 </mat-card>
