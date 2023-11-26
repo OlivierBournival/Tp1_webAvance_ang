@@ -18,6 +18,20 @@
   border-radius: 50%;
   padding: 5px;
 }
+.description-window {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-top: -50px; /* Adjust this value based on your design */
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 999; /* Ensure it appears above other elements */
+  color: black;
+  white-space: normal; /* Ensures the text wraps */
+}
+
 
 .effect-icon img {
   width: 20px; /* Adjust the size as needed */

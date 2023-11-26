@@ -9,10 +9,14 @@
     <mat-card-title>{{name}}</mat-card-title>
     <mat-card-subtitle>💰 {{price}}</mat-card-subtitle>
     <ng-container *ngIf="effet">
-      <div class="effect-icon">
-        <img [src]="effet.iconeUrl" alt="Effect Icon" />
-      </div>
-    </ng-container>
+  <div class="effect-icon" (mouseenter)="showDescription = true" (mouseleave)="showDescription = false">
+    <img [src]="effet.iconeUrl" alt="Effect Icon" />
+  </div>
+  <div class="description-window" *ngIf="showDescription">
+    {{ effet.description }}
+  </div>
+</ng-container>
+
   </mat-card-header>
   <mat-card-content
     style="display: flex; justify-content: flex-end; flex-direction: column; align-content: center; height: 100%"
