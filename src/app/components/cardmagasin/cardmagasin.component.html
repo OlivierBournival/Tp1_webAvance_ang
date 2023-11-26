@@ -8,7 +8,7 @@
   <mat-card-header style="background-color: #0008;" *ngIf="show==='front'">
     <mat-card-title>{{name}}</mat-card-title>
     <mat-card-subtitle>💰 {{price}}</mat-card-subtitle>
-    <ng-container *ngIf="effet.id !== 0">
+    <ng-container *ngIf="effet">
       <div class="effect-icon">
         <img [src]="effet.iconeUrl" alt="Effect Icon" />
       </div>

@@ -34,7 +34,7 @@ export class MagasinService {
   }
   async getcardsDailySelection(): Promise<CardMagasin[]> {
     let cards = await lastValueFrom(
-      this.http.get<CardMagasin[]>(this.domain + 'api/Magasin/DailySelection')
+      this.http.get<CardMagasin[]>(this.domain + 'api/CardService/getallcards') // this.http.get<CardMagasin[]>(this.domain + 'api/Magasin/DailySelection')
     ).catch((error) => {
       console.error(error);
       throw Error(error.error?.message ?? 'Unknown error');
@@ -61,7 +61,11 @@ export class MagasinService {
   }
 
   async getcardsWeeklySelection(): Promise<CardMagasin[]> {
+    console.log("future err:" );
+    console.log(this.domain + 'api/Magasin/WeeklySelection');
+    
     let cards = await lastValueFrom(
+
       this.http.get<CardMagasin[]>(this.domain + 'api/Magasin/WeeklySelection')
     ).catch((error) => {
       console.error(error);
