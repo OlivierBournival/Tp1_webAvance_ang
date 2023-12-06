@@ -9,6 +9,7 @@ import { Deck } from 'src/app/models/Deck';
 export class DeckComponent implements OnInit {
   @Input() show: string = 'front';
   @Input() deck?: Deck;
+  @Input() selected: boolean = false; // Add this line
   beautifulBackUrl =
     'https://i.pinimg.com/236x/3c/73/0d/3c730d6df70700a3c912a3c87d6d2027.jpg';
 

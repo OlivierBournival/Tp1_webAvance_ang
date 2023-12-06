@@ -1,3 +1,5 @@
+// home.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { Card } from '../models/Card';
 import { HttpClient } from '@angular/common/http';
@@ -20,6 +22,7 @@ export class HomeComponent implements OnInit {
   errorMessage: string = '';
   domain: string = environment.apiUrl;
   showCreerDeckModal = false;
+  selectedDeckId: number | null = null;
 
   constructor(
     public http: HttpClient,
@@ -55,8 +58,14 @@ export class HomeComponent implements OnInit {
       await this.delay(1000);
     }
   }
-  async SellCard(id: number) {//self explanatory
+
+  async SellCard(id: number) {
+    // self-explanatory
     return null;
+  }
+
+  selectDeck(deckId: number) {
+    this.selectedDeckId = deckId === this.selectedDeckId ? null : deckId;
   }
 
   async delay(ms: number) {
@@ -69,5 +78,9 @@ export class HomeComponent implements OnInit {
 
   openCreateDeckPage() {
     this.router.navigate(['/create-deck']);
+  }
+
+  openMagasinPage() {
+    this.router.navigate(['/magasin']);
   }
 }
