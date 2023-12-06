@@ -23,5 +23,6 @@ export class CardMagasin {
     public mana: number,
     public description: string,
     public effet?: Effect, 
+    public effetId?: number,
   ) {}
 }

@@ -5,6 +5,7 @@ import { lastValueFrom } from 'rxjs';
 import { MagasinService } from '../services/magasin.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
+import { Effect } from '../models/Effect';
 
 @Component({
   selector: 'app-magasin',
@@ -13,6 +14,7 @@ import { environment } from 'src/environments/environment.development';
 })
 export class MagasinComponent implements OnInit {
   cards: CardMagasin[] = [];
+  effects: Effect[] = [];
   showModal = false;
   errorMessage: string = '';
   domain: string = environment.apiUrl
@@ -27,19 +29,43 @@ export class MagasinComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
+    this.effects  = await this.serviceMagasin.getEffects()
+    console.log(this.effects)
     //this.cardOffreMoment = await this.serviceMagasin.getcardsCurrentOffer();
-    this.cardsDailySelection = await this.serviceMagasin.getcardsDailySelection();
+    this.cardsDailySelection= await this.serviceMagasin.getcardsDailySelection();
+    
+
+    //make a foreach for this.cardsDailySelection, each .effetId  wich is not null should make .effect corespond to effects wit the same id
+    this.cardsDailySelection.forEach((card) => {
+      if (card.effetId !== null) {
+        const matchingEffect = this.effects.find((effect) => effect.id === card.effetId);
+        if (matchingEffect) {
+          card.effet = matchingEffect;
+        }
+      }
+    });
+    console.log(this.cardsDailySelection)
 
 
 
 
     this.cardsWeeklySelection = await this.serviceMagasin.getcardsWeeklySelection();
+    this.cardsWeeklySelection.forEach((card) => {
+      if (card.effetId !== null) {
+        const matchingEffect = this.effects.find((effect) => effect.id === card.effetId);
+        if (matchingEffect) {
+          card.effet = matchingEffect;
+        }
+      }
+    });
 
     console.log('cardsBulk done'); 
 
   }
 
   // get all the cards from the server
+  
+   
   
 
 

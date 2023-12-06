@@ -4,6 +4,7 @@ import { lastValueFrom } from 'rxjs';
 import { AuthentificationService } from './authentification.service';
 import { Card, CardMagasin } from '../models/Card';
 import { environment } from 'src/environments/environment.development';
+import { Effect } from '../models/Effect';
 
 const domain = environment.apiUrl;
 
@@ -33,7 +34,7 @@ export class MagasinService {
   }
   async getcardsDailySelection(): Promise<CardMagasin[]> {
     let cards = await lastValueFrom(
-      this.http.get<CardMagasin[]>(this.domain + 'api/Magasin/DailySelection')
+      this.http.get<CardMagasin[]>(this.domain + 'api/CardService/getallcards') // this.http.get<CardMagasin[]>(this.domain + 'api/Magasin/DailySelection')
     ).catch((error) => {
       console.error(error);
       throw Error(error.error?.message ?? 'Unknown error');
@@ -43,9 +44,28 @@ export class MagasinService {
 
     return cards;
   }
+  async getEffects(): Promise<Effect[]> {
+    console.log('getHomeCards...');
+
+    let effects = await lastValueFrom(
+      this.http.get<Array<Effect>>(this.domain + 'api/CardService/GetAllEffect')
+    ).catch((error) => {
+      console.error(error);
+      throw Error(error.error?.message ?? 'Unknown error');
+    });
+
+    console.log(effects);
+    console.log('getEffects done');
+
+    return effects;
+  }
 
   async getcardsWeeklySelection(): Promise<CardMagasin[]> {
+    console.log("future err:" );
+    console.log(this.domain + 'api/Magasin/WeeklySelection');
+    
     let cards = await lastValueFrom(
+
       this.http.get<CardMagasin[]>(this.domain + 'api/Magasin/WeeklySelection')
     ).catch((error) => {
       console.error(error);
