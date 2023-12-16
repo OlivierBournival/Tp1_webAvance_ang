@@ -8,9 +8,11 @@ import { authGuardGuard } from './auth-guard.guard';
 import { MagasinComponent } from './magasin/magasin.component';
 import { CreateDeckPageComponent } from './pages/create-deck-page/create-deck-page.component';
 import { DeckDetailsComponent } from './pages/deck-details-page/deck-details-page.component';
+import { StatistiquesComponent } from './statistiques/statistiques.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'stats', component: StatistiquesComponent },
   { path: 'match', component: MatchComponent },  
   { path: 'magasin', component: MagasinComponent },
   { path: 'create-deck', component: CreateDeckPageComponent },

@@ -7,7 +7,9 @@ export class Card {
     public attack: number,
     public defense: number,
     public imageUrl: string,
-    public carteDepart: boolean
+    public rarity: number,
+    public carteDepart: boolean,
+    public mana: number,
   ) {}
 }
 export class CardMagasin {

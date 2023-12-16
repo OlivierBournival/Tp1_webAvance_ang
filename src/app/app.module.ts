@@ -30,6 +30,9 @@ import { CreateDeckPageComponent } from './pages/create-deck-page/create-deck-pa
 import { DeckDetailsComponent } from './pages/deck-details-page/deck-details-page.component';
 import { AddCardModalComponent } from './modals/add-card-modal/add-card-modal.component';
 
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { StatistiquesComponent } from './statistiques/statistiques.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +48,7 @@ import { AddCardModalComponent } from './modals/add-card-modal/add-card-modal.co
     CreateDeckPageComponent,
     DeckDetailsComponent,
     AddCardModalComponent,
+    StatistiquesComponent
   ],
   imports: [
     BrowserModule,
@@ -63,6 +67,7 @@ import { AddCardModalComponent } from './modals/add-card-modal/add-card-modal.co
     MatDialogModule,
     MatCheckboxModule,
     MatFormFieldModule,
+    CanvasJSAngularChartsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },

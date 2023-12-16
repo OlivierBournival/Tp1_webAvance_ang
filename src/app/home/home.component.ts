@@ -83,4 +83,8 @@ export class HomeComponent implements OnInit {
   openMagasinPage() {
     this.router.navigate(['/magasin']);
   }
+
+  openStatistiquePage() {
+    this.router.navigate(['/sstats']);
+  }
 }
