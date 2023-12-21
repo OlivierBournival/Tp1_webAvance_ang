@@ -1,5 +1,5 @@
 <mat-toolbar class="mat-toolbar mat-toolbar-single-row">
-    <span> A Vendre kn </span>
+    <span> A Vendre  </span>
 </mat-toolbar>
 
 <div style="display: flex; flex-direction: row; height: 100%;" *ngIf="cardsWeeklySelection.length > 0">
@@ -49,11 +49,9 @@ style="border: 1px solid white; border-radius: 10px; display: flex; flex-directi
     <div class="Rabais-en-bulk"
         style="margin-top: 60px; padding: 10px; display: flex; flex-direction: column; width: 20%; border: 1px solid white; border-radius: 10px; align-items: center;">
 
-        <h1>L'offre du Moment</h1>
+        <h1>Les trois deck de differente qualiter </h1>
         <p style="font-size: 24px; color: red;"> {{ cardOffreMoment.price }} </p>
           Utilisation de la variable card pour accéder aux propriétés spécifiques 
-        <app-cardMagasin style="padding: 5px;" [attack]="cardOffreMoment.attack" [defense]="cardOffreMoment.defense"
-            [imageUrl]="cardOffreMoment.imageUrl" [health]="cardOffreMoment.defense" [name]="cardOffreMoment.name"
-            [price]="cardOffreMoment.price" [effet]="cardOffreMoment.effet!" ></app-cardMagasin>
+        <app-deck style="padding: 5px;" ></app-deck>
     </div>
 </div>

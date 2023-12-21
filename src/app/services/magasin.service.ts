@@ -5,6 +5,7 @@ import { AuthentificationService } from './authentification.service';
 import { Card, CardMagasin } from '../models/Card';
 import { environment } from 'src/environments/environment.development';
 import { Effect } from '../models/Effect';
+import { Deck } from '../models/Deck';
 
 const domain = environment.apiUrl;
 
@@ -99,5 +100,17 @@ export class MagasinService {
     console.log(card);
 
     return card;
+  }
+  async getDecks(): Promise<Deck[]> {
+    let Deck = await lastValueFrom(
+      this.http.get<Deck[]>(this.domain + 'api/Magasin/Deck')
+    ).catch((error) => {
+      console.error(error);
+      throw Error(error.error?.message ?? 'Unknown error');
+    });
+
+    console.log(Deck);
+
+    return Deck;
   }
 }

@@ -1,0 +1,30 @@
+<mat-card 
+  [class.scale-up-center]="scale"
+  class="supercard"
+  [style.background-image]="show==='back' ? 'url('+beautifulBackUrl+')' : 'url('+deck?.urlImage+')'"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
+>
+  <mat-card>
+    <mat-card-header style="background-color: #0008;" *ngIf="show==='front'">
+      <mat-card-title>{{deck?.nom}}</mat-card-title>
+      <mat-card-subtitle>💰 {{deck?.prix}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content
+      style="display: flex; justify-content: flex-end; flex-direction: column; align-content: center; height: 100%"
+      *ngIf="show==='front'"
+    >
+      <button mat-button class="acheter-button">Acheter</button>
+    </mat-card-content>
+  </mat-card>
+    <mat-card-subtitle>💰 {{deck?.prix}}</mat-card-subtitle>
+   
+  </mat-card-header>
+  <mat-card-content
+    style="display: flex; justify-content: flex-end; flex-direction: column; align-content: center; height: 100%"
+    *ngIf="show==='front'"
+  >
+    
+    <button mat-button class="acheter-button">Acheter</button>
+  </mat-card-content>
+</mat-card>

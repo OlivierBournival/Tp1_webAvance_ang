@@ -60,6 +60,12 @@ export class MagasinComponent implements OnInit {
     });
 
     console.log('cardsBulk done'); 
+    console.log(this.cardsWeeklySelection)
+    console.log('dECK TEST')
+    console.log(await this.serviceMagasin.getDecks())
+    console.log(' TEST donne')
+
+
 
   }
 

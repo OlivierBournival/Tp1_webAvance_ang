@@ -1,0 +1,68 @@
+.supercard {
+  width: 250px;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+}
+.acheter-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 8px;
+}
+.effect-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ccc;
+  border-radius: 50%;
+  padding: 5px;
+}
+.description-window {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-top: -50px; /* Adjust this value based on your design */
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 999; /* Ensure it appears above other elements */
+  color: black;
+  white-space: normal; /* Ensures the text wraps */
+}
+
+
+.effect-icon img {
+  width: 20px; /* Adjust the size as needed */
+  height: 20px; /* Adjust the size as needed */
+}
+
+.red {
+  color: red;
+}
+.scale-up-center {
+	-webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+ @-webkit-keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(1.3);
+            transform: scale(1.3);
+  }
+}
+@keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(1.3);
+            transform: scale(1.3);
+  }
+}
