@@ -12,7 +12,8 @@ import { environment } from 'src/environments/environment.development';
 export class AuthentificationService {
   baseUrl = environment.apiUrl;
   accountBaseUrl = this.baseUrl + 'api/Account/';
-  email = localStorage.getItem('email');
+  email: string | null = localStorage.getItem('email');
+  userID: string | null = localStorage.getItem('userID'); // Ajout de la propriété userID
 
   constructor(public http: HttpClient, public cookieService: CookieService) {}
 
@@ -49,6 +50,10 @@ export class AuthentificationService {
     console.log(result);
 
     localStorage.setItem('email', loginDTO.email);
+    localStorage.setItem('userID', result.userID); // Stockage du userID
+
+    // Mise à jour de la propriété userID du service
+    this.userID = result.userID;
 
     console.log('Logged in');
   }
@@ -68,6 +73,10 @@ export class AuthentificationService {
     console.log(result);
 
     localStorage.removeItem('email');
+    localStorage.removeItem('userID'); // Suppression du userID
+
+    this.email = null;
+    this.userID = null;
 
     console.log('Logged out');
   }

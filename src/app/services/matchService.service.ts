@@ -7,6 +7,7 @@ import { JoiningMatchData } from '../models/JoiningMatchData';
 import { StartMatch, Events } from '../models/events';
 import { Card } from '../models/Card';
 import { environment } from 'src/environments/environment.development';
+import { HubConnectionBuilder, LogLevel } from '@aspnet/signalr';
 
 const domain = environment.apiUrl;
 
@@ -14,24 +15,39 @@ const domain = environment.apiUrl;
   providedIn: 'root',
 })
 export class MatchServiceService {
+  private hubConnection: any;
   playerID: number | null =
     localStorage.getItem('playerID') == null
       ? null
       : parseInt(localStorage.getItem('playerID')!);
 
   turnindex: number = 0;
+
   constructor(
     public authentificationService: AuthentificationService,
     public http: HttpClient
-  ) {}
+  ) {
+    this.hubConnection = new HubConnectionBuilder()
+      .withUrl('https://localhost:7219/gameplayHub')
+      .configureLogging(LogLevel.Information)
+      .build();
+
+    this.hubConnection
+      .start()
+      .then(() => console.log('Hub connection started'))
+      .catch((err: any) =>
+        console.log('Error while starting hub connection: ' + err)
+      );
+  }
 
   // Méthode qui s'occupe de la création du match et qui initalise le match et tous les composants dont on va avoir besoin.
-
   async joinMatch(): Promise<boolean> {
     console.log('Joining match...');
 
-    const data: JoiningMatchData = await lastValueFrom(
-      this.http.post<any>(domain + 'api/Match/JoinMatch', null)
+    // get la data depuis le hub signalR
+    const data: JoiningMatchData = await this.hubConnection.invoke(
+      'JoinMatch',
+      this.authentificationService.userID
     );
 
     console.log(data);

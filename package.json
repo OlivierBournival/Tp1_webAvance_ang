@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^16.1.0",
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
+    "@aspnet/signalr": "^1.0.27",
     "@canvasjs/angular-charts": "^1.0.3",
     "@canvasjs/charts": "^3.7.31",
     "@canvasjs/stockcharts": "^1.7.31",
