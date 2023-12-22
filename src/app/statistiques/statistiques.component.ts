@@ -64,9 +64,6 @@ export class StatistiquesComponent implements OnInit {
         case 3: //Légendaire
           this.Légendaire++
           break;
-        case 4: //Mythique
-        this.Mythique++
-          break;
       }
 
       console.log(this.Commune)
@@ -146,8 +143,7 @@ export class StatistiquesComponent implements OnInit {
         { y: this.Commune, name: "Commune" },
         { y: this.Rare, name: "Rare" },
         { y: this.Épique, name: "Épique" },
-        { y: this.Légendaire, name: "Légendaire" },
-        { y: this.Mythique, name: "Mythique"}
+        { y: this.Légendaire, name: "Légendaire" }
       ]
       }]
     }	

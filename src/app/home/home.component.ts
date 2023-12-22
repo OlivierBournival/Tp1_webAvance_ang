@@ -85,6 +85,6 @@ export class HomeComponent implements OnInit {
   }
 
   openStatistiquePage() {
-    this.router.navigate(['/sstats']);
+    this.router.navigate(['/stats']);
   }
 }

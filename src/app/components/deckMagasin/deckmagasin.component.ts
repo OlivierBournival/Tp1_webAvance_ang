@@ -31,7 +31,6 @@ export class deckMagasinComponent implements OnInit {
   ngOnInit() {}
   
   async addCard() {
-
     this.serviceMagasin.payementDeck(this.name)
   }
 
