@@ -33,6 +33,6 @@
         <td *ngIf="health == 0">{{defense}}</td>
       </tr>
     </table>
-    <button mat-button class="acheter-button">Acheter</button>
+    <button mat-button class="acheter-button" (click)="addCard()">Acheter</button>
   </mat-card-content>
 </mat-card>

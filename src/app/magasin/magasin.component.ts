@@ -20,7 +20,17 @@ export class MagasinComponent implements OnInit {
   domain: string = environment.apiUrl
   cardsDailySelection : CardMagasin[] = [];
   cardsWeeklySelection : CardMagasin[] = [];
-  cardOffreMoment: CardMagasin =  new CardMagasin(1,"stev",1,1,"ee",false,1,1,1,"w") ;
+  cardOffreMoment: CardMagasin[] = [];
+  name : string[] = [
+    "Basic",
+    "Normal",
+    "Super"
+  ]
+  Price : string[] = [
+    "1000",
+    "2000",
+    "3000"
+  ]
 
   constructor(
     public http: HttpClient,

@@ -1,30 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Effect } from '../../models/Effect';
+
 import { MagasinService } from 'src/app/services/magasin.service';
 
 
 
 @Component({
-  selector: 'app-cardMagasin',
-  templateUrl: './cardmagasin.component.html',
-  styleUrls: ['./cardmagasin.component.css'],
+  selector: 'app-deckMagasin',
+  templateUrl: './deckmagasin.component.html',
+  styleUrls: ['./deckmagasin.component.css'],
   
 })
-export class CardMagasinComponent implements OnInit {
+export class deckMagasinComponent implements OnInit {
 
   
   @Input() show: string = 'front';
-    @Input() idcard: number =0;
-    @Input() health: number = 0;
-    @Input() defense: number = 0;
-    @Input() attack = 0;
     @Input() name = '';
-    @Input() imageUrl = '';
-    @Input() price = 0;
-    @Input() rarity = 0;
-    @Input() mana = 0;
+    @Input() price = ' ';
     @Input() description = '';
-    @Input() effet: Effect = new Effect(0, '', '', '');
     
   scale= false;
   // Assuming 'effet' is initialized as null initially
@@ -36,13 +28,11 @@ export class CardMagasinComponent implements OnInit {
   constructor(public serviceMagasin: MagasinService) {}
 
 
-  ngOnInit() {
-    console.log(this.idcard)
-
-  }
+  ngOnInit() {}
   
   async addCard() {
-    this.serviceMagasin.payement(this.idcard)
+
+    this.serviceMagasin.payementDeck(this.name)
   }
 
   onMouseEnter() {

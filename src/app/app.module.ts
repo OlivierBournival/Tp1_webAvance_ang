@@ -32,6 +32,7 @@ import { AddCardModalComponent } from './modals/add-card-modal/add-card-modal.co
 
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { StatistiquesComponent } from './statistiques/statistiques.component';
+import { deckMagasinComponent } from './components/deckMagasin/deckmagasin.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { StatistiquesComponent } from './statistiques/statistiques.component';
     CreateDeckPageComponent,
     DeckDetailsComponent,
     AddCardModalComponent,
-    StatistiquesComponent
+    StatistiquesComponent,
+    deckMagasinComponent
   ],
   imports: [
     BrowserModule,

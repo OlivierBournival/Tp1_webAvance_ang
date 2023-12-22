@@ -12,6 +12,7 @@ const domain = environment.apiUrl;
   providedIn: 'root',
 })
 export class MagasinService {
+
   playerID: number | null =
     localStorage.getItem('playerID') == null
       ? null
@@ -99,5 +100,26 @@ export class MagasinService {
     console.log(card);
 
     return card;
+  }
+
+  async payement(id:number): Promise<void> {
+
+    let card = await lastValueFrom(this.http.post<any>(this.domain + 'api/Magasin/PaidCard/' + id.toString(), null))
+    .catch((error) => {
+      console.error(error);
+      throw Error(error.error?.message ?? 'Unknown error')
+    });
+
+    console.log(card);
+  }
+
+  async payementDeck(name: string) {
+    let card = await lastValueFrom(this.http.post<any>(this.domain + 'api/Magasin/PaidDeck/' + name, null))
+    .catch((error) => {
+      console.error(error);
+      throw Error(error.error?.message ?? 'Unknown error')
+    });
+
+    console.log(card);
   }
 }
