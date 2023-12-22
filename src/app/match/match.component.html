@@ -1,42 +1,58 @@
-<div style="position: absolute; top: 75px; left: 50%; transform: translateX(-50%); width: 200px; height: 20px;">
-  <div>
-    {{ serviceMatch.enemyEmail }}
-  </div>
-  <div [ngStyle]="{'background-color': enemyHealthPercentage >= 50 ? 'green' : 'red', 'border-radius': '5px'}">
-    <div [style.width.%]="enemyHealthPercentage" style="height: 100%; border-radius: 5px;">
-      <span style="display: block; text-align: center; line-height: 20px; color: white;">{{ enemyHealthPercentage
-        }}%</span>
+<div class="container mx-auto">
+  <!-- do an button end -->
+  <button mat-raised-button color="accent" style="margin-right: 20px;" (click)="leaveMatch()">Quitter la partie</button>
+
+  <div class="text-lg mt-3">
+    <div>
+      {{ serviceMatch.enemyEmail }}
     </div>
-  </div>
-</div>
-<div class="board">
-  <div style="height: 45%;">
-    <h1 style="position: absolute;">Adversaire</h1>
-    <div style="display: flex; position: absolute; width: 100%; top: -100px;">
-      <div class="container">
-        <app-card *ngFor="let card of enemycards" [show]="'back'" class="card"></app-card>
+    <div
+      [ngStyle]="{'background-color': enemyHealthPercentage >= 50 ? 'green' : 'red', 'border-radius': '5px', 'height': '20px'}">
+      <div [style.width.%]="enemyHealthPercentage" style="height: 100%; border-radius: 5px;">
+        <span style="display: block; text-align: center; line-height: 20px; color: white;">{{ enemyHealthPercentage
+          }}%</span>
       </div>
     </div>
-  </div>
-  <div style="height: 45%;">
-    <h1 style="position: absolute;">Mon jeu</h1>
   </div>
 
-  <div style="display: flex; position: absolute; width: 100%; bottom: -70px;">
-    <div class="container">
-      <app-card *ngFor="let card of mycards" [attack]="card.attack" [defense]="card.defense" [imageUrl]="card.imageUrl"
-      [health]="card.defense" [name]="card.name" class="card">
-      </app-card>
-    </div>
-    <div style="position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); width: 200px; height: 20px;">
-      <div>
-        {{ authentificationService.email }}
-      </div>
-      <div [ngStyle]="{'background-color': playerHealthPercentage >= 50 ? 'green' : 'red', 'border-radius': '5px'}">
-        <div [style.width.%]="playerHealthPercentage" style="height: 100%; border-radius: 5px;">
-          <span style="display: block; text-align: center; line-height: 20px; color: white;">{{ playerHealthPercentage
-            }}%</span>
+  <div class="board">
+    <div style="height: 200px;">
+      <h1 style="font-size: 16px; top: 5px; left: 50%">Adversaire</h1>
+      <div style="display: flex; width: 100%; top: 30px;">
+        <div class="containert">
+          <div *ngIf="!enemycards || enemycards.length === 0"
+            style="text-align: center; margin: auto; color: white; height: 50%;">L'adversaire n'a pas de cartes</div>
+          <app-card *ngFor="let card of enemycards" [show]="'back'" class="card"></app-card>
         </div>
+      </div>
+    </div>
+
+    <div style="height: 200px;">
+      <h1 style=" font-size: 16px; top: 5px; left: 50%">Mon jeu</h1>
+      <div *ngIf="!mycards || mycards.length === 0" style="text-align: center; margin: auto; color: white; top: 30px;">
+        Pas
+        de cartes disponibles</div>
+    </div>
+
+    <div style="display: flex; width: 100%; bottom: 10px;">
+      <div class="containert">
+        <app-card *ngFor="let card of mycards" [attack]="card.attack" [defense]="card.defense"
+          [imageUrl]="card.imageUrl" [health]="card.defense" [name]="card.name" class="card">
+        </app-card>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="text-lg mt-3">
+    <div>
+      {{ authentificationService.email }}
+    </div>
+    <div
+      [ngStyle]="{'background-color': playerHealthPercentage >= 50 ? 'green' : 'red', 'border-radius': '5px', 'height': '20px'}">
+      <div [style.width.%]="playerHealthPercentage" style="height: 100%; border-radius: 5px;">
+        <span style="display: block; text-align: center; line-height: 20px; color: white;">{{ playerHealthPercentage
+          }}%</span>
       </div>
     </div>
   </div>

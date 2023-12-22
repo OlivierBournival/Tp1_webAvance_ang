@@ -8,6 +8,7 @@ import { StartMatch, Events } from '../models/events';
 import { Card } from '../models/Card';
 import { environment } from 'src/environments/environment.development';
 import { HubConnectionBuilder, LogLevel } from '@aspnet/signalr';
+import { Router } from '@angular/router';
 
 const domain = environment.apiUrl;
 
@@ -20,13 +21,18 @@ export class MatchServiceService {
     localStorage.getItem('playerID') == null
       ? null
       : parseInt(localStorage.getItem('playerID')!);
-
   turnindex: number = 0;
+  match: Match | null = localStorage.getItem('match') == null ? null : JSON.parse(localStorage.getItem('match')!);
+  enemyEmail: string | null = localStorage.getItem('enemyEmail') == null ? null : localStorage.getItem('enemyEmail');
 
   constructor(
     public authentificationService: AuthentificationService,
-    public http: HttpClient
+    public http: HttpClient,
+    private router: Router
   ) {
+    // 
+    // SignalR
+    //
     this.hubConnection = new HubConnectionBuilder()
       .withUrl('https://localhost:7219/gameplayHub')
       .configureLogging(LogLevel.Information)
@@ -38,102 +44,113 @@ export class MatchServiceService {
       .catch((err: any) =>
         console.log('Error while starting hub connection: ' + err)
       );
+
+    // MatchJoined
+    this.hubConnection.on('MatchJoined', (data: any) => {
+      console.log(data);
+
+      if (data == null) {
+        return;
+      }
+
+      // Vérification pour savoir quel joueur on est.
+      const isA = data.playerA.name == this.authentificationService.email;
+      const isB = data.playerB.name == this.authentificationService.email;
+
+      // Vérificiation si on est bien dans la partie
+      if (!isA && !isB) {
+        console.error('You are not in this match');
+        return;
+      }
+
+      // localStorage
+      // set match
+      this.setMatch(data.match);
+      // set playerID
+      this.setPlayerID(isA ? data.playerA.id : data.playerB.id);
+      // set enemyEmail
+      this.setEnemyEmail(isA ? data.playerB.name : data.playerA.name);
+
+      console.log('Joined match id : ' + data.match.id);
+
+      // Rediriger vers la page de match
+      this.router.navigate(['/match']);
+    });
+
+    // MatchEnd
+    this.hubConnection.on('MatchEnd', (data: any) => {
+      console.log(data);
+
+      // remove match
+      this.setMatch(null);
+      // remove playerID
+      this.setPlayerID(null);
+      // remove enemyEmail
+      this.setEnemyEmail(null);
+
+      console.log('Match ended !');
+
+      // Rediriger vers la page principale
+      this.router.navigate(['/']);
+    });
   }
+
+  // 
+  // Méthodes
+  //
 
   // Méthode qui s'occupe de la création du match et qui initalise le match et tous les composants dont on va avoir besoin.
   async joinMatch(): Promise<boolean> {
     console.log('Joining match...');
 
     // get la data depuis le hub signalR
-    const data: JoiningMatchData = await this.hubConnection.invoke(
+    const data = await this.hubConnection.invoke(
       'JoinMatch',
       this.authentificationService.userID
     );
 
     console.log(data);
 
-    if (data == null) {
-      return false;
-    }
-
-    // Vérification pour savoir quel joueur on est.
-    const isA = data.playerA.name == this.authentificationService.email;
-    const isB = data.playerB.name == this.authentificationService.email;
-
-    // Vérificiation si on est bien dans la partie
-    if (!isA && !isB) {
-      console.error('You are not in this match');
-      return false;
-    }
-
-    // localStorage
-    localStorage.setItem('match', JSON.stringify(data.match));
-    this.setPlayerID(isA ? data.playerA.id : data.playerB.id);
-    localStorage.setItem(
-      'enemyEmail',
-      isA ? data.playerB.name : data.playerA.name
-    );
-
-    console.log('Joined match id : ' + data.match.id);
     return true;
   }
 
-  // Permet de commencer la recherche de match (La méthode est appelé tant que la fenêtre de recherche est ouverte)
-  async StartMatch(): Promise<void> {
-    const match = this.getMatch();
+  // Methode qui permet de quitter le match
+  async leaveMatch(): Promise<boolean> {
+    if (this.match == null) {
+      throw Error('Match is null, impossible to leave...');
+    }
 
-    let x = await lastValueFrom(
-      this.http.post<any>(domain + 'api/Match/StartMatch/' + match.id, null)
+    console.log('Leaving match... id : ' + this.match.id);
+
+    // get la data depuis le hub signalR
+    const data = await this.hubConnection.invoke(
+      'Leave',
+      this.match.id
     );
 
-    console.log(x);
+    console.log(data);
+
+    return true;
   }
 
   //TODO : Permet de jouer une carte
-  async PlayCard(idcard: Number): Promise<void> {
-    const match = this.getMatch();
+  async playCard(idcard: Number): Promise<void> {
+
+    if (this.match == null) {
+      throw Error('Match is null');
+    }
 
     let x = await lastValueFrom(
       this.http.post<any>(
-        domain + 'api/Match/PlayCard/' + match.id + '/' + idcard,
+        domain + 'api/Match/PlayCard/' + this.match.id + '/' + idcard,
         null
       )
     );
     console.log(x);
   }
 
-  // Appeler tous les X temps pour update le match au niveau client [Méthode la plus importante!]
-  async UpdateMatch(): Promise<StartMatch | null> {
-    const match = this.getMatch();
-
-    try {
-      let response = await lastValueFrom(
-        this.http.get<string>(
-          domain + 'api/Match/UpdateMatch/' + match.id + '/' + this.turnindex
-        )
-      );
-
-      console.log(this.turnindex);
-      console.log(response);
-      if (response == null) {
-        return null;
-      }
-
-      //Désérialization du JSON que le serveur envoie
-      const jsonObject = JSON.parse(response) as StartMatch;
-
-      console.log(jsonObject);
-
-      // Incrémentation de l'index pour que le serveur n'envoie pas la même action à nouveau.
-      this.turnindex++;
-      return jsonObject;
-    } catch (error) {
-      throw error;
-    }
-  }
-
   // Permet de récupérer une carte spécific
-  async Getcard(id: number): Promise<Card> {
+  async getCard(id: number): Promise<Card> {
     let x = await lastValueFrom(
       this.http.get<Card>(domain + 'api/card/GetCard/' + id)
     );
@@ -141,16 +158,40 @@ export class MatchServiceService {
     return x;
   }
 
-  getMatch(): Match {
-    return JSON.parse(localStorage.getItem('match') + '');
+
+  ///
+  /// LocalStorage
+  ///
+  setMatch(match: Match | null) {
+    this.match = match;
+
+    if (match == null) {
+      localStorage.removeItem('match');
+      return;
+    }
+
+    localStorage.setItem('match', JSON.stringify(match));
   }
 
-  setPlayerID(id: number) {
+  setPlayerID(id: number | null) {
     this.playerID = id;
+
+    if (id == null) {
+      localStorage.removeItem('playerID');
+      return;
+    }
+
     localStorage.setItem('playerID', id + '');
   }
 
-  get enemyEmail(): string {
-    return localStorage.getItem('enemyEmail') + '';
+  setEnemyEmail(email: string | null) {
+    this.enemyEmail = email;
+
+    if (email == null) {
+      localStorage.removeItem('enemyEmail');
+      return;
+    }
+
+    localStorage.setItem('enemyEmail', email);
   }
 }

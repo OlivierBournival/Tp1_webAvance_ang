@@ -40,22 +40,12 @@ export class HomeComponent implements OnInit {
   async openJoindreModal() {
     this.showModal = true;
 
-    let joined = false;
-
-    while (!joined && this.showModal) {
-      try {
-        joined = await this.serviceMatch.joinMatch();
-      } catch (x: any) {
-        console.error(x);
-        this.errorMessage = x.message;
-      }
-
-      if (joined) {
-        this.router.navigate(['/match']);
-        break;
-      }
-
-      await this.delay(1000);
+    
+    try {
+      await this.serviceMatch.joinMatch();
+    } catch (x: any) {
+      console.error(x);
+      this.errorMessage = x.message;
     }
   }
 
@@ -74,6 +64,8 @@ export class HomeComponent implements OnInit {
 
   closeJoindreModal() {
     this.showModal = false;
+
+    this.serviceMatch.leaveMatch();
   }
 
   openCreateDeckPage() {

@@ -2,16 +2,16 @@
   height: 100%;
   transform: scale(.8) perspective(100vh) rotateX(30deg);
   background-size: cover;
-  background-image: url("/assets/mergedBoardImage.png");
+  background-image: url('/assets/mergedBoardImage.png');
 }
- 
-.container {
+
+.containert {
   position: relative;
   display: flex;
   margin: auto;
   transform: scale(0.7) translateY(-90px);
 }
-  
+
 .card {
   display: flex;
   box-shadow: -1rem 0 3rem #000;
