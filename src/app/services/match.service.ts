@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment.development';
 import { HubConnectionBuilder, LogLevel } from '@aspnet/signalr';
 import { Router } from '@angular/router';
 import { DecksService } from './decks.service';
+import { JoiningMatchData } from '../models/JoiningMatchData';
 
 const domain = environment.apiUrl;
 
@@ -92,6 +93,17 @@ export class MatchService {
 
       // Rediriger vers la page principale
       this.router.navigate(['/']);
+    });
+
+
+    // MatchUpdate
+    this.hubConnection.on('MatchUpdate', (matchData: Match) => {
+      console.log(matchData);
+
+      // set match
+      this.setMatch(matchData);
+
+      console.log('Match updated !');
     });
   }
 

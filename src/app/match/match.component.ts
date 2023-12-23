@@ -36,6 +36,9 @@ export class MatchComponent implements OnInit {
       this.mycards = this.matchService.match?.playerDataB.cardsPile;
       this.enemycards = this.matchService.match?.playerDataA.cardsPile;
     }
+
+    this.playerHealthPercentage = this.matchService.match?.playerDataA.health;
+    this.enemyHealthPercentage = this.matchService.match?.playerDataB.health;
   }
 
   async playCard(cardId: number) {
