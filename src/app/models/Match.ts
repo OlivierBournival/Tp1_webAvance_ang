@@ -1,3 +1,5 @@
+import { MatchPlayerData } from "./MatchPlayerData";
+
 export class Match {
     constructor(
         public id: number = 0,
@@ -6,6 +8,8 @@ export class Match {
         public isMatchCompleted: boolean = false,
         public winnerUserId: string | null = null,
         public userAId: string,
-        public userBId: string
+        public userBId: string,
+        public playerDataA: MatchPlayerData,
+        public playerDataB: MatchPlayerData,
     ) { }
 }

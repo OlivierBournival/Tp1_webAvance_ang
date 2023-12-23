@@ -3,32 +3,32 @@ import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { AuthentificationService } from './authentification.service';
 import { Match } from '../models/Match';
-import { JoiningMatchData } from '../models/JoiningMatchData';
-import { StartMatch, Events } from '../models/events';
 import { Card } from '../models/Card';
 import { environment } from 'src/environments/environment.development';
 import { HubConnectionBuilder, LogLevel } from '@aspnet/signalr';
 import { Router } from '@angular/router';
+import { DecksService } from './decks.service';
 
 const domain = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root',
 })
-export class MatchServiceService {
+export class MatchService {
   private hubConnection: any;
   playerID: number | null =
     localStorage.getItem('playerID') == null
       ? null
       : parseInt(localStorage.getItem('playerID')!);
   turnindex: number = 0;
-  match: Match | null = localStorage.getItem('match') == null ? null : JSON.parse(localStorage.getItem('match')!);
+  public match: Match | null = localStorage.getItem('match') == null ? null : JSON.parse(localStorage.getItem('match')!);
   enemyEmail: string | null = localStorage.getItem('enemyEmail') == null ? null : localStorage.getItem('enemyEmail');
 
   constructor(
     public authentificationService: AuthentificationService,
     public http: HttpClient,
-    private router: Router
+    private router: Router,
+    public deckService: DecksService
   ) {
     // 
     // SignalR
@@ -106,7 +106,8 @@ export class MatchServiceService {
     // get la data depuis le hub signalR
     const data = await this.hubConnection.invoke(
       'JoinMatch',
-      this.authentificationService.userID
+      this.authentificationService.userID,
+      this.deckService.selectedDeckId
     );
 
     console.log(data);
@@ -134,19 +135,21 @@ export class MatchServiceService {
   }
 
   //TODO : Permet de jouer une carte
-  async playCard(idcard: Number): Promise<void> {
-
+  async playCard(cardId: number): Promise<void> {
     if (this.match == null) {
       throw Error('Match is null');
     }
 
-    let x = await lastValueFrom(
-      this.http.post<any>(
-        domain + 'api/Match/PlayCard/' + this.match.id + '/' + idcard,
-        null
-      )
+    console.log('Playing card... id : ' + cardId);
+
+    // get la data depuis le hub signalR
+    const data = await this.hubConnection.invoke(
+      'PlayCard',
+      this.match.id,
+      cardId
     );
-    console.log(x);
+
+    console.log('PlayCard action sent ! Response : ', data);
   }
 
   // Permet de récupérer une carte spécific
@@ -193,5 +196,13 @@ export class MatchServiceService {
     }
 
     localStorage.setItem('enemyEmail', email);
+  }
+
+  isPlayerA(): boolean {
+    if (this.match == null) {
+      return false;
+    }
+
+    return this.match.userAId == String(this.playerID);
   }
 }

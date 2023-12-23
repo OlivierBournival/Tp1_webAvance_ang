@@ -3,7 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Card } from '../models/Card';
 import { HttpClient } from '@angular/common/http';
-import { MatchServiceService } from '../services/matchService.service';
+import { MatchService } from '../services/match.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
 import { Deck } from '../models/Deck';
@@ -22,11 +22,10 @@ export class HomeComponent implements OnInit {
   errorMessage: string = '';
   domain: string = environment.apiUrl;
   showCreerDeckModal = false;
-  selectedDeckId: number | null = null;
 
   constructor(
     public http: HttpClient,
-    public serviceMatch: MatchServiceService,
+    public serviceMatch: MatchService,
     public cardsService: CardsService,
     public decksService: DecksService,
     public router: Router
@@ -38,9 +37,16 @@ export class HomeComponent implements OnInit {
   }
 
   async openJoindreModal() {
+    // if no deck is selected
+    if (this.decksService.selectedDeckId == null) {
+      this.errorMessage = 'Aucun deck sélectionné !';
+      return;
+    } else {
+      this.errorMessage = '';
+    }
+
     this.showModal = true;
 
-    
     try {
       await this.serviceMatch.joinMatch();
     } catch (x: any) {
@@ -55,7 +61,7 @@ export class HomeComponent implements OnInit {
   }
 
   selectDeck(deckId: number) {
-    this.selectedDeckId = deckId === this.selectedDeckId ? null : deckId;
+    this.decksService.setSelectDeckId(deckId);
   }
 
   async delay(ms: number) {

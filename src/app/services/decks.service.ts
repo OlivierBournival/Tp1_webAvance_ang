@@ -12,6 +12,7 @@ import { RemoveCardFromDeckDTO } from '../DTO/RemoveCardFromDeckDTO';
 })
 export class DecksService {
   domain: string = environment.apiUrl;
+  selectedDeckId: number | null = localStorage.getItem('selectedDeckId') == null ? null : parseInt(localStorage.getItem('selectedDeckId')!);
 
   constructor(private http: HttpClient) {}
 
@@ -51,7 +52,6 @@ export class DecksService {
       )
     );
   }
-  
 
   deleteDeck(IdDeck: number): Observable<any> {
     return this.http.post(this.domain + 'api/deck/DeleteDeck', { IdDeck });
@@ -72,4 +72,16 @@ export class DecksService {
   addCardsToDeck(addCardsDTO: AddCardsDTO): Observable<any> {
     return this.http.post(`${this.domain}api/deck/AddCardsToDeck`, addCardsDTO);
   }
+
+  setSelectDeckId(deckId: number | null) {
+    this.selectedDeckId = deckId;
+
+    if (deckId == null) {
+      localStorage.removeItem('selectedDeckId');
+      return;
+    }
+
+    localStorage.setItem('selectedDeckId', deckId + '');
+  }
+
 }

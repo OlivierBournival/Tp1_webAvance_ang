@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MatchServiceService } from '../services/matchService.service';
+import { MatchService } from '../services/match.service';
 import { Events, StartMatch } from '../models/events';
 import { Card } from '../models/Card';
 import { AuthentificationService } from '../services/authentification.service';
+import { CardPile } from '../models/CardPile';
 
 @Component({
   selector: 'app-match',
@@ -10,27 +11,39 @@ import { AuthentificationService } from '../services/authentification.service';
   styleUrls: ['./match.component.css'],
 })
 export class MatchComponent implements OnInit {
-  public update: Events = new Events('', 0, 0, []);
-  mycards: Card[] = [];
-  enemycards: Card[] = [];
   playerHealthPercentage: number = 100;
   enemyHealthPercentage: number = 100;
+  mycards: CardPile[] = [];
+  enemycards: CardPile[] = [];
 
   constructor(
-    public serviceMatch: MatchServiceService,
+    public matchService: MatchService,
     public authentificationService: AuthentificationService
   ) {}
 
   ngOnInit() {
-    
+    if (this.matchService.match == null) {
+      this.matchService.joinMatch();
+      return;
+    }
+
+    const isPlayerA: boolean = this.matchService.isPlayerA();
+
+    if (isPlayerA) {
+      this.mycards = this.matchService.match?.playerDataA.cardsPile;
+      this.enemycards = this.matchService.match?.playerDataB.cardsPile;
+    } else {
+      this.mycards = this.matchService.match?.playerDataB.cardsPile;
+      this.enemycards = this.matchService.match?.playerDataA.cardsPile;
+    }
   }
 
-  async PlayCard(card: Card) {
-    this.serviceMatch.playCard(card.id);
+  async playCard(cardId: number) {
+    this.matchService.playCard(cardId);
   }
 
   leaveMatch() {
-    this.serviceMatch.leaveMatch();
+    this.matchService.leaveMatch();
   }
 
   // async UpdateMatch() {

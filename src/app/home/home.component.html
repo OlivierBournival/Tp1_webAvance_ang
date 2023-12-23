@@ -1,14 +1,14 @@
 <div style="display: flex; margin: 20px;">
   <button mat-raised-button color="accent" style="margin-right: 20px;" (click)="openJoindreModal()">Joindre une
     partie</button>
-  <span style="margin-left: 10px;"></span>
+  <span style="margin-left: 10px;">{{ errorMessage }}</span>
 </div>
 
 <!-- Mes decks -->
 <div
   style="padding: 10px; padding-top: 20px; padding-bottom: 20px; display: flex; flex-wrap: wrap; row-gap: 20px; column-gap: 20px;">
   <div *ngFor="let deck of decks" style="margin-right: 20px;">
-    <app-deck [deck]="deck" [selected]="deck.deckId === selectedDeckId" (click)="selectDeck(deck.deckId)"></app-deck>
+    <app-deck [deck]="deck" [selected]="deck.deckId === decksService.selectedDeckId" (click)="selectDeck(deck.deckId)"></app-deck>
   </div>
   <button mat-fab color="accent" style="margin-right: 20px;" (click)="openCreateDeckPage()">+</button>
 </div>
